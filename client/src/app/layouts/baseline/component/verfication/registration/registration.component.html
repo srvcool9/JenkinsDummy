@@ -1,0 +1,276 @@
+<div class="bg-image ">
+<div class="row mt-2 mx-1 mt-2 mb-2 card">
+    <div class="col-12">
+        <h4  style="color: #234280;font-weight: bold;">{{ title }}</h4>
+    </div>
+    <div class="mt-2">
+    <div class="col-sm-5">
+        <h5 class="mb-3 mt-1 text-color-blue">Personal Information</h5>
+    </div>
+    <form [formGroup]="detailsForm">
+        <div class="row mx-1">
+            <input type="text" class="form-control" formControlName="enumeratorId" hidden="dis" />
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Name <i class="asterik">*</i></label>
+                <input type="text" class="form-control mb-2" formControlName="enumeratorName" placeholder="Enter Name" [readonly]="readonly"/>
+                <small class="form-text text-muted" *ngIf="!enumeratorName.valid && (enumeratorName.dirty ||enumeratorName.touched) ">
+                    <span *ngIf="enumeratorName.errors['required']">
+                      Name is a required field
+                    </span>
+                    <span *ngIf="enumeratorName.errors['pattern']">
+                       Only alphabets allowed
+                      </span>
+                    <span *ngIf="enumeratorName.errors['maxlength']">
+                        Maximum length is 50 characters
+                      </span>
+                </small>
+            </div>
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">DOB <i class="asterik">*</i></label>
+                <input type="date" class="form-control mb-2" formControlName="dateOfBirth" placeholder="Enter Description" [readonly]="readonly"/>
+                <small class="form-text text-muted" *ngIf="!dateOfBirth.valid && (dateOfBirth.dirty ||dateOfBirth.touched) ">
+                    <span *ngIf="dateOfBirth.errors['required']">
+                        DOB is a required field
+                    </span>
+                </small>
+            </div>
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Mobile Number <i class="asterik">*</i></label>
+                <input type="text" class="form-control mb-2" formControlName="mobile" placeholder="Enter mobile number" [readonly]="readonly"/>
+                <small class="form-text text-muted" *ngIf="!mobile.valid && (mobile.dirty ||mobile.touched) ">
+                    <span *ngIf="mobile.errors['required']">
+                    Mobile number is a required field
+                    </span>
+                    <span *ngIf="mobile.errors['maxlength']">
+                     Mobile number should be of 10 digits
+                        </span>
+                        <span *ngIf="mobile.errors['pattern']">
+                            Only numbers allowed
+                             </span>
+                </small>
+            </div>
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Email</label>
+                <input type="email" class="form-control mb-2" formControlName="email" placeholder="Enter email" [readonly]="readonly"/>
+                <small class="form-text text-muted" *ngIf="!email.valid && (email.dirty ||email.touched) ">
+                    <span *ngIf="email.errors['pattern']">
+                        Please enter a valid email
+                    </span>
+                </small>
+            </div>
+        </div>
+        <div class="row mx-1 mt-3">
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Father's Name <i class="asterik">*</i></label>
+                <input type="text" class="form-control mb-2" formControlName="fatherName" placeholder="Enter father's name" [readonly]="readonly"/>
+                <small class="form-text text-muted" *ngIf="!fatherName.valid && (fatherName.dirty ||fatherName.touched) ">
+                    <span *ngIf="fatherName.errors['required']">
+                     Father's name is a required field
+                    </span>
+                    <span *ngIf="fatherName.errors['maxlength']">
+                        Maximum length is 50 characters
+                      </span>
+                </small>
+            </div>            
+            <div class="col-9 responsive-registration">
+                <label class="mb-2">Residential Address <i class="asterik">*</i></label>
+                <input type="text" class="form-control mb-2" formControlName="residentialAddress" placeholder="Enter Residential Address" [readonly]="readonly"/>
+                <small class="form-text text-muted" *ngIf="!address.valid && (address.dirty ||address.touched) ">
+                    <span *ngIf="address.errors['required']">
+                      Address is a required field
+                    </span>
+                    <span *ngIf="address.errors['maxlength']">
+                       Maximum 250 characters allowed
+                      </span>
+                      <span *ngIf="address.errors['pattern']">
+                       Character not allowed
+                       </span>
+                </small>
+            </div>
+        </div>
+        <div class="row mx-1 mt-3">
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">District <i class="asterik">*</i></label>
+                <ng-select placeholder="Select District" class=" mb-2" [clearable]="false" [searchable]="true"
+                    [dropdownPosition]="'bottom'" (change)="seletedDistrict($event)" [items]="districtList" bindLabel="name" bindValue="id" [readonly]="readonly"
+                    formControlName="district" name="ok" >
+                </ng-select>
+                <small class="form-text text-muted" *ngIf="!district.valid && (district.dirty ||district.touched) ">
+                    <span *ngIf="district.errors['required']">
+                        District is a required field
+                    </span>
+                </small>
+            </div>
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Block <i class="asterik">*</i></label>
+                <ng-select placeholder="Select Block" class=" mb-2" [clearable]="false" [searchable]="false"
+                    [dropdownPosition]="'bottom'" [items]="blocks" bindLabel="name" bindValue="id" [readonly]="readonly"
+                    formControlName="block" name="ok">
+                </ng-select>
+                <small class="form-text text-muted" *ngIf="!block.valid && (block.dirty ||block.touched) ">
+                    <span *ngIf="block.errors['required']">
+                        Block is a required field
+                    </span>
+                </small>
+            </div>
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Highest Qualification <i class="asterik">*</i></label>
+                <input type="text" class="form-control mb-2" formControlName="higherQualification" placeholder="Enter higher qualification" [readonly]="readonly"/>
+                <small class="form-text text-muted" *ngIf="!higherQualification.valid && (higherQualification.dirty ||higherQualification.touched) ">
+                    <span *ngIf="higherQualification.errors['required']">
+                        Qualification is a required field
+                    </span>
+                    <span *ngIf="higherQualification.errors['maxlength']">
+                        Maximum length is 30 characters
+                      </span>
+                </small>
+            </div>
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Supporting Document (if any) </label>
+                <input type="file" class="form-control"  accept="application/pdf" 
+                formControlName="supportingDocument" placeholder="Upload document"
+                (change)="uploadDoc($event)"
+                [attr.disabled]="disFile" title=" " ngDefaultControl />
+            <small class="form-text text-muted-file">Maximum upload file size : 2MB</small>
+            </div>
+        </div>
+
+        <div class="col-sm-5 mt-3">
+            <h5 class="mb-3 text-color-blue">Education Details</h5>
+        </div>
+        <div class="row mx-1 mt-3">
+            
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Institutional District <i class="asterik">*</i></label>
+                <ng-select placeholder="Select Institutional District" [clearable]="false" [searchable]="true"
+                    [dropdownPosition]="'bottom'" class=" mb-2" [items]="institutionDistricts" bindLabel="name" bindValue="id" [readonly]="readonly"
+                    formControlName="institutionDistrict" name="ok" (change)="selectedInstitutionDistrict($event)">
+                </ng-select>
+                <small class="form-text text-muted" *ngIf="!institutionDistrict.valid && (institutionDistrict.dirty ||institutionDistrict.touched) ">
+                    <span *ngIf="institutionDistrict.errors['required']">
+                        Institutional District is a required field
+                    </span>
+                </small>
+            </div>
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Institution Name <i class="asterik"></i></label>
+                <ng-select placeholder="Select Institution Name" class=" mb-2" [clearable]="false" [searchable]="false"
+                    [dropdownPosition]="'bottom'" [items]="institutionNames" bindLabel="institutionName" bindValue="institutonId" [readonly]="readonly"
+                    formControlName="institutionName" name="ok" >
+                </ng-select>
+                <!-- <input type="email" class="form-control" formControlName="institutionName" placeholder="Enter Institution Name" [readonly]="readonly"/> -->
+                <!-- <small class="form-text text-muted" *ngIf="!institutionName.valid && (institutionName.dirty ||institutionName.touched) ">
+                    <span *ngIf="institutionName.errors['required']">
+                     Institution Name is a required field
+                    </span>
+                </small> -->
+            </div>
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Grade <i class="asterik">*</i></label>
+                <input type="number" class="form-control mb-2" formControlName="grade" placeholder="Enter Grade" [readonly]="readonly"/>
+                <small class="form-text text-muted" *ngIf="!grade.valid && (grade.dirty ||grade.touched) ">
+                    <span *ngIf="grade.errors['required']">
+                      Grade is a required field
+                    </span>
+                    <span *ngIf="grade.errors['maxlength']">
+                       Maximum 1 characters allowed
+                      </span>
+                </small>
+            </div>
+        </div>
+
+        <div class="col-sm-5 mt-3">
+            <h5 class="mb-3 text-color-blue">Bank Details</h5>
+        </div>
+        <div class="row mx-1 mt-3">
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Name of Account Holder <i class="asterik">*</i></label>
+                <input type="text" class="form-control mb-2" formControlName="accountHolderName" placeholder="Enter Name" [readonly]="readonly"/>
+                <small class="form-text text-muted" *ngIf="!accountHolderName.valid && (accountHolderName.dirty ||accountHolderName.touched) ">
+                    <span *ngIf="accountHolderName.errors['required']">
+                     Account Holder Name is a required field
+                    </span>
+                    <span *ngIf="accountHolderName.errors['pattern']">
+                    Only alphabets allowed
+                    </span>
+                    <span *ngIf="accountHolderName.errors['maxlength']">
+                        Maximum 50 characters allowed
+                        </span>
+                </small>
+            </div>
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Bank Name <i class="asterik">*</i></label>
+                <ng-select placeholder="Select Bank" [clearable]="false" [searchable]="true"
+                [dropdownPosition]="'bottom'" (change)="seletedBank($event)" [items]="bankList" bindLabel="name" bindValue="id" [readonly]="readonly"
+                formControlName="bankName" name="ok" >
+            </ng-select>
+                <!-- <input type="text" class="form-control" formControlName="bankName" placeholder="Enter Bank Name" [readonly]="readonly"/> -->
+                <small class="form-text text-muted" *ngIf="!bankName.valid && (bankName.dirty ||bankName.touched) ">
+                    <span *ngIf="bankName.errors['required']">
+                      Bank name is a required field
+                    </span>
+                </small>
+            </div>
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">IFSC code <i class="asterik">*</i></label>
+                <input type="text" class="form-control mb-2" formControlName="IFSC" placeholder="Enter IFSC" [readonly]="readonly" (input)="onIFSCEntered($event)"/>
+                <small class="form-text text-muted" *ngIf="!IFSC.valid && (IFSC.dirty ||IFSC.touched) ">
+                    <span *ngIf="IFSC.errors['required']">
+                        IFSC code is a required field
+                    </span>
+                    <span *ngIf="IFSC.errors['maxlength']">
+                        Maximum 11 characters allowed
+                    </span>
+                    <span *ngIf="IFSC.errors['pattern']">
+                      Enter valid IFSC code
+                    </span>
+                </small>
+            </div>
+
+       
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Branch Name<i class="asterik"></i></label>
+                <input type="text" class="form-control mb-2" placeholder="Your Bank Branch" 
+                [value]="branchName"
+                readonly/>
+            </div>
+
+
+            <div class="col-3 responsive-registration mb-2">
+                <label class="mb-2">Account Number <i class="asterik">*</i></label>
+                <input type="text" class="form-control  mb-2" formControlName="accountNumber" placeholder="Enter Account Number" [readonly]="readonly"/>
+                <small class="form-text text-muted" *ngIf="!accountNumber.valid && (accountNumber.dirty ||accountNumber.touched) ">
+                    <span *ngIf="accountNumber.errors['required']">
+                      Account number is a required field
+                    </span>
+                </small>
+            </div>
+        </div>
+
+        <div class="col-sm-5 mt-3" *ngIf="showVerfiedBy">
+            <h5 class="mb-3 text-color-blue">Verification Details</h5>
+        </div>
+        <div class="row mx-1 mt-3" *ngIf="showVerfiedBy">
+            <div class="col-3  responsive-registration">
+                <label class="mb-2">Verified By</label>
+                <input type="text" class="form-control" formControlName="verifiedBy" [readonly]="readonly"/>
+            </div>
+            <div class="col-3 responsive-registration">
+                <label class="mb-2">Verification Date</label>
+                <input type="text" class="form-control" formControlName="verificationDate" [readonly]="readonly"/>
+            </div>
+        </div>
+        <div class="row-buttons mb-4" *ngIf="showVerf">
+            <input type="submit" value="Verify" class="btn btn-primary mx-0" (click)="verify()" />
+        </div>
+        <div class="row-buttons mb-4" *ngIf="showVerfiedBy">
+            <input type="submit" value="Back" class="btn btn-primary mx-0" (click)="back()" />
+        </div>
+        <div class="row-buttons mb-4" *ngIf="showReg">
+            <input type="submit" value="Next" class="btn btn-primary1 mx-0 mx-3" (click)="next()" [disabled]="detailsForm.invalid"/>
+            <input type="submit" value="Cancel" class="btn btn-danger mx-0" (click)="cancel()" />
+        </div>
+    </form>
+</div>
+</div>
+</div>

@@ -1,0 +1,709 @@
+<div class="mt-1 mx-1">
+    <div class="col-md-12 col-md-offset-3 card">
+
+        <h4 class="modal-title mx-2 mt-2 mb-2" style="color: #234280;font-weight: bold;">
+            Initiate Training
+        </h4>
+
+        <form [formGroup]="batchForm">
+            <ul id="progressbar" class="d-flex p-0 mt-2 mx-5" style="margin-left: 8.5rem !important;">
+                <li [ngClass]="step >= 1 ? 'active ' : 'inactive'"></li>
+                <a [ngClass]="connectorC >=2 ? 'on' : 'off'"><span class="connector-visibility">
+                        {{connector}}</span></a>
+                <li [ngClass]="step >= 2 ? 'active' : 'inactive'"></li>
+                <a [ngClass]="connectorC >=3 ? 'on' : 'off'"><span class="connector-visibility">
+                        {{connector}}</span></a>
+                <li [ngClass]="step >= 3 ? 'active' : 'inactive'"></li>
+                <a [ngClass]="connectorC ==4 ? 'on' : 'off'"><span class="connector-visibility">
+                        {{connector}}</span></a>
+                <li [ngClass]="step == 4 ? 'active' : 'inactive'"></li>
+            </ul>
+            <ul class="d-flex p-0 mt-0 mx-5" style="margin-top: -1rem !important;">
+                <li class="content margin-x-3-4">INITIATE BATCH</li>
+                <li class="content margin-x-10">BATCH & ADD TRAINER</li>
+                <li class="content mx-4">COORDINATOR</li>
+                <li class="content" style="margin-left: 15rem !important;">TRAINEE</li>
+            </ul>
+
+            <!-- FIRST FORM (BATCH) -->
+
+            <fieldset *ngIf="step == 1" class="mb-5">
+                <div class="row" style="margin:5rem !important">
+                    <input type="text" hidden formControlName="batchinitiateId" />
+                    <div class="col-md-3">
+                        <label class="form-group mx-3"> Maximum Batch Size</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="number" class="form-control" formControlName="maxBatchSize" readonly />
+                    </div>
+                    <div class="col-md-3"> </div>
+                    <div class="col-md-3"></div>
+
+                    <div class="col-md-3 mt-3">
+                        <label><i class="asterik"> * </i>Tentative Number of Participants</label>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <input type="number" class="form-control" formControlName="numOfParticipants"
+                            (input)="getNumberOfParticipants($event)" min="1" />
+                        <small class="form-text text-muted"
+                            *ngIf="!numOfParticipants.valid && (numOfParticipants.dirty ||numOfParticipants.touched) ">
+                            <span *ngIf="numOfParticipants.errors['required']">
+                                Number of Participants is a required field
+                            </span>
+                        </small>
+                    </div>
+                    <div class="col-md-2 mx-5 mt-3">
+                        <label><i class="asterik"> * </i>Number of Rooms</label>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <input type="number" class="form-control" formControlName="numOfRooms"
+                            (input)="getNumberOfRooms($event)" min="2" />
+                        <small class="form-text text-muted"
+                            *ngIf="!numOfRooms.valid && (numOfRooms.dirty ||numOfRooms.touched) ">
+                            <span *ngIf="numOfRooms.errors['required']">
+                                Number of Rooms is a required field
+                            </span>
+                        </small>
+                    </div>
+
+                    <div class="col-md-3 mt-3">
+                        <label class="mx-3"> Total Batches</label>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <input type="number" class="form-control" formControlName="totalBatches" readonly />
+                    </div>
+                    <div class="col-md-2 mx-5 mt-3">
+                        <label class="mx-3">Cycles</label>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <input type="number" class="form-control" formControlName="cycles" readonly
+                            onkeydown="if(event.key==='.' || event.key==='e' || event.key==='E'){event.preventDefault();}"
+                            step="1" min="1" />
+                    </div>
+
+                    <div style="margin-top:5rem !important">
+                        <button type="button" class="btn btn-primary pull-right mx-3" (click)="next()"
+                            [disabled]="batchForm.invalid">
+                            Save & Next
+                        </button>
+                        <button type="button" class="btn btn-danger pull-right" (click)="cancelBatchForm()">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+
+
+
+            </fieldset>
+
+        </form>
+
+
+        <!-- SECOND FORM (TRAINER INFORMATION) -->
+
+        <div *ngIf="step==2" class="mb-5">
+            <div class="mt-4 container">
+
+                <form [formGroup]="batchMasterForm" class="mx-1 mb-5">
+                    <div class="card">
+                        <div class="row mx-5 mt-3">
+                            <div class="col-md-4">
+                                <input type="text" hidden formControlName="batchId" />
+                                <label class="mb-2"><i class="asterik">* </i>Batch Number</label>
+                                <ng-select placeholder="Select Batch Number (Add)" [clearable]="false"
+                                    [searchable]="false" [dropdownPosition]="'bottom'" [items]="batchNumber"
+                                    bindLabel="batchNumber" bindValue="batchId" formControlName="batchNumber" name="ok"
+                                    [readonly]="readOnlytrainerInfo" (change)="getCoordinatorBatchEdit($event)">
+                                </ng-select>
+                                <small class="form-text text-muted"
+                                    *ngIf="!batchNumbere.valid && (batchNumbere.dirty ||batchNumbere.touched) ">
+                                    <span *ngIf="batchNumbere.errors['required']">
+                                        Batch Number is a required field
+                                    </span>
+                                </small>
+                            </div>
+                            <!-- <div class="col-md-4" *ngIf="!batchMasterAdd">
+                                <input type="text" hidden formControlName="batchId" />
+                                <label class="mb-2"><i class="asterik">* </i>Batch Number</label>
+                                <ng-select placeholder="Select Batch Number (Edit)" [clearable]="false" [searchable]="false"
+                                    [dropdownPosition]="'bottom'" [items]="batchesList" bindLabel="batchNumber"
+                                    bindValue="batchId" formControlName="batchNumber" name="ok"
+                                    [readonly]="readOnlytrainerInfo" (change)="getCoordinatorBatchEdit($event)">
+                                </ng-select>
+                                <small class="form-text text-muted"
+                                    *ngIf="!batchNumbere.valid && (batchNumbere.dirty ||batchNumbere.touched) ">
+                                    <span *ngIf="batchNumbere.errors['required']">
+                                        Batch Number is a required field
+                                    </span>
+                                </small>
+                            </div> -->
+
+                            <div class="col-md-4">
+                                <label class="mb-2"><i class="asterik">* </i>Start Date</label>
+                                <input type="date" formControlName="startDate" class="form-control" [min]=startDate
+                                    [max]=endDate [readonly]="readOnlytrainerInfo" />
+                                <small class="form-text text-muted"
+                                    *ngIf="!startDatee.valid && (startDatee.dirty ||startDatee.touched) ">
+                                    <span *ngIf="startDatee.errors['required']">
+                                        Start Date is a required field
+                                    </span>
+                                </small>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="mb-2"><i class="asterik">* </i>End Date</label>
+                                <input type="date" formControlName="endDate" class="form-control" [min]=startDate
+                                    [max]=endDate (change)="getEndDate($event)" [readonly]="readOnlytrainerInfo" />
+                                <small id="errorEndDate"></small>
+                                <small class="form-text text-muted"
+                                    *ngIf="!endDatee.valid && (endDatee.dirty ||endDatee.touched) ">
+                                    <span *ngIf="endDatee.errors['required']">
+                                        End Date is a required field
+                                    </span>
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3 mx-5">
+                            <div class="col-md-4">
+                                <label class="mb-2"><i class="asterik">* </i>Start Time</label>
+                                <!-- <input type="time" formControlName="startTime" class="form-control"
+                                    [readonly]="readOnlytrainerInfo" /> -->
+                                <input id="appt-time" type="time" name="appt-time" step="2" formControlName="startTime"
+                                    class="form-control" [readonly]="readOnlytrainerInfo">
+                                <small class="form-text text-muted"
+                                    *ngIf="!startTime.valid && (startTime.dirty ||startTime.touched) ">
+                                    <span *ngIf="startTime.errors['required']">
+                                        Start Time is a required field
+                                    </span>
+                                </small>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="mb-2"><i class="asterik">* </i>End Time</label>
+                                <!-- <input type="time" formControlName="endTime" class="form-control"
+                                    (change)="getEndTime($event)" [readonly]="readOnlytrainerInfo" /> -->
+                                <input id="appt-time" type="time" name="appt-time" step="2" formControlName="endTime"
+                                    class="form-control" [readonly]="readOnlytrainerInfo" (change)="getEndTime($event)">
+                                <small id="error"></small>
+                                <small class="form-text text-muted"
+                                    *ngIf="!endTime.valid && (endTime.dirty ||endTime.touched) ">
+                                    <span *ngIf="endTime.errors['required']">
+                                        End Time is a required field
+                                    </span>
+                                </small>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="mb-2">Venue</label>
+                                <input type="text" formControlName="venue" class="form-control"
+                                    placeholder="Enter Venue" [readonly]="readOnlytrainerInfo" />
+                                <small class="form-text text-muted"
+                                    *ngIf="!venue.valid && (venue.dirty ||venue.touched) ">
+                                    <span *ngIf="venue.errors['maxlength']">
+                                        Maximum 150 characters allowed
+                                    </span>
+                                </small>
+                            </div>
+
+                        </div>
+
+                        <div class="row mt-3 mx-5">
+                            <div class="col-md-8">
+                                <label class="mb-2">Address</label>
+                                <input type="text" formControlName="address" class="form-control"
+                                    placeholder="Enter Address" [readonly]="readOnlytrainerInfo" />
+                                <small class="form-text text-muted"
+                                    *ngIf="!address.valid && (address.dirty ||address.touched) ">
+                                    <span *ngIf="address.errors['maxlength']">
+                                        Maximum 250 characters allowed
+                                    </span>
+                                </small>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="mb-2"><i class="asterik">* </i>Trainer Type</label>
+                                <ng-select placeholder="Select Trainer Type" [clearable]="false" [searchable]="false"
+                                    [dropdownPosition]="'bottom'" [items]="trainerType" bindLabel="name" bindValue="id"
+                                    (change)="selectTrainerType($event)" formControlName="trainerType" name="ok"
+                                    [readonly]="readOnlytrainerInfo">
+                                </ng-select>
+                                <small class="form-text text-muted"
+                                    *ngIf="!trainerTypee.valid && (trainerTypee.dirty ||trainerTypee.touched) ">
+                                    <span *ngIf="trainerTypee.errors['required']">
+                                        Trainer Type is a required field
+                                    </span>
+                                </small>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-4 mt-3 mx-5">
+                            <label class="mb-2 mt-2">Checklist</label>
+                            <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="checkListItemss"
+                                formControlName="checkListItems">
+                            </ng-multiselect-dropdown>
+                            <!-- <div *ngFor="let ch of checkList; let i = index">
+                                <label>
+                                    <input type="checkbox" [value]="ch.name" class="form-check-input mx-1"
+                                        (change)="onCheckListItemChange($event)"
+                                        [attr.disabled]="readOnlytrainerInfo" />
+                                    {{ch.name}}
+                                </label>
+                            </div> -->
+                        </div>
+
+                        <div>
+                            <button type="button" class="btn btn-primary pull-right mx-3 mt-2 mb-3"
+                                (click)="saveBatchMaster()" [disabled]="batchMasterForm.invalid"
+                                style="width: 6%;">
+                                Save
+                            </button>
+                        </div>
+
+
+                    </div>
+
+                    <button type="button" class="btn btn-blue pull-right mx-0 mt-3" (click)="addTrainer()"
+                        [disabled]="batchMasterForm.invalid" *ngIf="batchMasterSaved">
+                        <i class="fa fa-plus mx-2"></i>Add Trainer
+                    </button>
+                </form>
+
+
+                <div *ngIf="isEmployee">
+                    <div class="flex mt-5">
+                        <div class="left mt-4">
+                            <div style="display: flex;">
+                                <input type="search" maxlength="20" autocomplete="off" name="focus"
+                                    style="height: auto; width: 240px;" id="border"
+                                    placeholder="  Search Employee By Code" class="form-control"
+                                    (change)="getEmpCode($event)" />
+                                <span class="input-group-text" (click)="addEmp()"><i class="fa fa-user-plus"></i></span>
+                            </div>
+                        </div>
+                        <div class="right mt-5">
+                            <i class="fa fa-eye mx-2"></i>
+                            <label> Show All Batch </label>
+                        </div>
+                    </div>
+
+
+
+                    <form>
+                        <fieldset class="mb-5">
+                            <div class="mt-4 container">
+                                <div class="row">
+
+                                    <!-- Employee -->
+
+
+                                    <div class="col-md-12 mt-0">
+                                        <ag-grid-angular style="width: 100%; height: 50vh;"
+                                            (firstDataRendered)="onFirstDataRendered($event)"
+                                            class="ag-theme-alpine grid px-2 mt-2" [animateRows]="true"
+                                            [rowData]="empList" [gridOptions]="gridOptionsEmployee"
+                                            [columnDefs]="columnDefsEmployee"
+                                            [frameworkComponents]="frameworkComponents" [animateRows]="true"
+                                            [pagination]="true" (gridReady)="onGridReady($event)">
+                                        </ag-grid-angular>
+                                    </div>
+
+                                    <div class="mt-5">
+                                        <button type="button" class="btn btn-blue pull-right mx-0"
+                                            (click)="saveEmployeeInfo()">
+                                            Save Info.
+                                        </button>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+
+
+                <!-- OTHERS -->
+                <form [formGroup]="othersForm">
+                    <div class="mt-5 container">
+                        <div *ngIf="isOthers" class="row">
+                            <div class="col-md-4 mt-5">
+                                <label class="mb-2"><i class="asterik">* </i>Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Name"
+                                    formControlName="name" />
+                                <small class="form-text text-muted" *ngIf="
+            !name.valid &&
+            (name.dirty || name.touched)
+          ">
+                                    <span *ngIf="name.errors['required']">
+                                        Name is a required field
+                                    </span>
+                                    <span *ngIf="name.errors['pattern']">
+                                        Name should be alphanumeric
+                                    </span>
+                                    <span *ngIf="name.errors['maxlength']">
+                                        {{'addAssmt.max'|translate}}
+                                    </span>
+                                </small>
+                            </div>
+                            <div class="col-md-4 mt-5">
+                                <label class="mb-2">City/Village</label>
+                                <input type="text" class="form-control" placeholder="Enter City/Village"
+                                    formControlName="city" />
+                            </div>
+                            <div class="col-md-4 mt-5">
+                                <label class="mb-2">State</label>
+                                <input type="text" class="form-control" placeholder="Enter State"
+                                    formControlName="state" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="mb-2 mt-3"><i class="asterik">* </i>Mobile No.</label>
+                                <input type="text" class="form-control" placeholder="Enter Mobile Number"
+                                    formControlName="mobile" />
+                                <small class="form-text text-muted"
+                                    *ngIf="!mobile.valid && (mobile.dirty ||mobile.touched) ">
+                                    <span *ngIf="mobile.errors['required']">
+                                        Mobile number is a required field
+                                    </span>
+                                    <span *ngIf="mobile.errors['maxlength']">
+                                        Mobile number should be of 10 digits
+                                    </span>
+                                    <span *ngIf="mobile.errors['pattern']">
+                                        Only numbers allowed
+                                    </span>
+                                </small>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="mb-2 mt-3"><i class="asterik">* </i>Email</label>
+                                <input type="email" class="form-control" placeholder="Enter Email"
+                                    formControlName="email" />
+                                <small class="form-text text-muted" *ngIf="!email.valid && (email.dirty
+                                    ||email.touched) ">
+                                    <span *ngIf="email.errors['required']">
+                                        Email is a required field
+                                    </span>
+                                    <span *ngIf="email.errors['pattern']">
+                                        Please enter a valid email
+                                    </span>
+                                </small>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="mb-2 mt-3"><i class="asterik">* </i>Organization Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Organization Name"
+                                    formControlName="organizationName" />
+                                <small class="form-text text-muted" *ngIf="
+                                    !organizationName.valid &&
+                                    (organizationName.dirty || organizationName.touched)
+                                  ">
+                                    <span *ngIf="organizationName.errors['required']">
+                                        Organization Name is a required field
+                                    </span>
+
+                                    <span *ngIf="organizationName.errors['maxlength']">
+                                        Maximum 200 characters allowed
+                                    </span>
+                                </small>
+
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="mb-2 mt-3"><i class="asterik">* </i>Aadhar Card</label>
+                                <input type="text" class="form-control" placeholder="Enter Aadhar Card Number"
+                                    formControlName="aadhar" />
+                                <small class="form-text text-muted"
+                                    *ngIf="!aadhar.valid && (aadhar.dirty ||aadhar.touched) ">
+                                    <span *ngIf="aadhar.errors['required']">
+                                        Aadhar number is a required field
+                                    </span>
+                                    <span *ngIf="aadhar.errors['maxlength']">
+                                        Aadhar number should be of 12 digits
+                                    </span>
+                                    <span *ngIf="aadhar.errors['pattern']">
+                                        Only numbers allowed
+                                    </span>
+                                </small>
+
+                            </div>
+                            <div class="col-md-4">
+                                <label class="mb-2 mt-3"><i class="asterik">* </i>Select Bank</label>
+                                <ng-select placeholder="Select Bank" [clearable]="false" [searchable]="true"
+                                    [dropdownPosition]="'bottom'" (change)="seletedBank($event)" [items]="bankList"
+                                    bindLabel="name" bindValue="id" name="ok" formControlName="bank">
+                                </ng-select>
+                                <small class="form-text text-muted" *ngIf="!bank.valid && (bank.dirty ||bank.touched) ">
+                                    <span *ngIf="bank.errors['required']">
+                                        Bank Name is a required field
+                                    </span>
+                                </small>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="mb-2 mt-3"><i class="asterik">* </i>IFSC Code</label>
+                                <input type="text" class="form-control" (input)="onIFSCEntered($event)"
+                                    placeholder="Enter IFSC Code" formControlName="IFSC" />
+                                <small class="form-text text-muted" *ngIf="!IFSC.valid && (IFSC.dirty ||IFSC.touched) ">
+                                    <span *ngIf="IFSC.errors['required']">
+                                        IFSC code is a required field
+                                    </span>
+                                    <span *ngIf="IFSC.errors['maxlength']">
+                                        Maximum 11 characters allowed
+                                    </span>
+                                    <span *ngIf="IFSC.errors['pattern']">
+                                        Enter valid IFSC code
+                                    </span>
+                                </small>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="mb-2 mt-3"><i class="asterik">* </i>Branch</label>
+                                <input type="text" class="form-control" readonly placeholder="Your Bank Branch Name"
+                                    formControlName="bankBranch" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="mb-2 mt-3"><i class="asterik">* </i>Name(As in Bank)</label>
+                                <input type="text" class="form-control" formControlName="nameAsInBank"
+                                    placeholder="Enter Name(As in Bank) " />
+                                <small class="form-text text-muted" *ngIf="
+            !nameAsInBank.valid &&
+            (nameAsInBank.dirty || nameAsInBank.touched)
+          ">
+                                    <span *ngIf="nameAsInBank.errors['required']">
+                                        Name is a required field
+                                    </span>
+                                    <span *ngIf="nameAsInBank.errors['pattern']">
+                                        Name should be alphanumeric
+                                    </span>
+                                    <span *ngIf="nameAsInBank.errors['maxlength']">
+                                        {{'addAssmt.max'|translate}}
+                                    </span>
+                                </small>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" formControlName="batchNumber" hidden />
+                                <label class="mb-2 mt-3"><i class="asterik">* </i>Account No.</label>
+                                <input type="text" class="form-control" placeholder="Enter Account No."
+                                    formControlName="accountNumber" />
+                                <small class="form-text text-muted"
+                                    *ngIf="!accountNumber.valid && (accountNumber.dirty ||accountNumber.touched) ">
+                                    <span *ngIf="accountNumber.errors['required']">
+                                        Account number is a required field
+                                    </span>
+                                    <span *ngIf="accountNumber.errors['maxlength']">
+                                        Maximum length of account number is 18
+                                    </span>
+                                    <span *ngIf="accountNumber.errors['pattern']">
+                                        Only alphanumeric allowed
+                                    </span>
+                                </small>
+                            </div>
+
+                            <div class="mt-5">
+                                <button type="button" class="btn btn-blue pull-right mx-0"
+                                    (click)="saveOthersFormData()">
+                                    Save Info.
+                                </button>
+                            </div>
+
+                            <div class="col-md-12 mt-5">
+                                <ag-grid-angular style="width: 100%; height: 50vh;"
+                                    (firstDataRendered)="onFirstDataRendered($event)"
+                                    class="ag-theme-alpine grid px-2 mt-2" [animateRows]="true" [rowData]="othersList"
+                                    [gridOptions]="gridOptionsOthers" [columnDefs]="columnDefsOthers"
+                                    [frameworkComponents]="frameworkComponents" [animateRows]="true" [pagination]="true"
+                                    (gridReady)="onGridReady1($event)">
+                                </ag-grid-angular>
+                            </div>
+
+                            <div class="mt-5">
+                                <button type="button" class="btn btn-blue pull-right mx-0" (click)="saveOthersInfo()">
+                                    Save Info.
+                                </button>
+                            </div>
+
+
+
+
+                        </div>
+
+
+                    </div>
+                </form>
+
+                <div style="margin-top: 3.5rem !important;">
+                    <button type="button" class="btn btn-primary-blue pull-left mx-0 mt-5" (click)="previous()">
+                        Previous
+                    </button>
+                    <div style="margin-right: -1rem;">
+                        <button type="button" class="btn btn-primary pull-right mx-3 mt-5" (click)="next()">
+                            Save & Next
+                        </button>
+                        <button type="button" class="btn btn-danger pull-right mt-5" (click)="cancelBatchInfoForm()">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <!-- </fieldset> -->
+            <!-- </form> -->
+
+        </div>
+
+
+        <div class="container">
+            <div *ngIf="step==3" class="mb-5">
+                <div class="animated fadeIn">
+                    <form>
+                        <div class="responsive-display justify-content-between mt-3 mx-2 ">
+                            <div class="col-sm-3 grid-header">
+                                <h5 style="font-weight: bold;" class="headingColor">Add Coordinator</h5>
+                                <label class="mb-2 mt-3">Select Batch</label>
+                                <!-- <div *ngIf="add">
+                                    <ng-select placeholder="Select Batch" (change)="getCoordinatorBatch($event)"
+                                        [clearable]="false" [searchable]="false" [dropdownPosition]="'bottom'"
+                                        [items]="batchNumber" bindLabel="name" bindValue="id" name="ok">
+                                    </ng-select>
+                                </div> -->
+
+                                <div>
+                                    <ng-select placeholder="Select Batch..." (change)="getCoordinatorBatch($event)"
+                                        [clearable]="false" [searchable]="false" [dropdownPosition]="'bottom'"
+                                        [items]="batchNumberEdit" bindLabel="batchNumber" bindValue="batchId" name="ok">
+
+                                    </ng-select>
+                                </div>
+
+                            </div>
+
+                            <div class="flex mt-5">
+                                <div class="left mt-2">
+                                    <div style="display: flex;">
+                                        <input type="search" maxlength="20" autocomplete="off" name="focus"
+                                            style="height: auto; width: 240px;" id="border"
+                                            (change)="getEmpCode($event)" placeholder="  Search Employee By Code"
+                                            class="form-control" />
+                                        <span class="input-group-text"><i class="fa fa-user-plus"
+                                                (click)="addEmp()"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mt-0">
+                            <ag-grid-angular style="width: 100%; height: 50vh;"
+                                (firstDataRendered)="onFirstDataRendered($event)" class="ag-theme-alpine grid px-2 mt-2"
+                                [animateRows]="true" [rowData]="employeeList" [gridOptions]="gridOptionsEmployee"
+                                [columnDefs]="columnDefsEmployee" [frameworkComponents]="frameworkComponents"
+                                [animateRows]="true" [pagination]="true" (gridReady)="onGridReady($event)">
+                            </ag-grid-angular>
+                        </div>
+
+                        <div class="mt-5">
+                            <button type="button" class="btn btn-blue pull-right mx-0">
+                                Save Info.
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <div class="flex mt-5" style="width: 102%;">
+                        <div class="left mt-3" style="margin-left: -2rem">
+                            <div style="display: flex;">
+                                <button type="button" class="btn btn-primary-blue pull-left mx-2 mt-3"
+                                    (click)="previous()">
+                                    Previous
+                                </button>
+                            </div>
+                        </div>
+                        <div class="right mt-3">
+                            <button type="button" class="btn btn-primary pull-right mx-3 mt-3" (click)="next()">
+                                Save & Next
+                            </button>
+                            <button type="button" class="btn btn-danger pull-right mt-3"
+                                (click)="cancelBatchInfoForm()">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <div *ngIf="step==4">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="mb-2">Select Batch</label>
+
+                        <div>
+                            <ng-select placeholder="Select Batch Number..." (change)="getTraineesBatch($event)"
+                                [clearable]="false" [searchable]="false" [dropdownPosition]="'bottom'"
+                                [items]="batchNumberEdit" bindLabel="batchNumber" bindValue="batchId" name="ok"
+                                [readonly]="disableBatch">
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div style="display: flex;margin-top: 1.8rem">
+                            <input type="search" maxlength="20" autocomplete="off" (change)="getEmpCode($event)"
+                                name="focus" style="height: auto;" id="border" placeholder="  Search Employee By Code"
+                                class="form-control" />
+                            <span class="input-group-text"><i class="fa fa-user-plus"
+                                    (click)="addEmpTrainee()"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="mb-1">Upload Trainee List</label>
+                        <input type="file" class="form-control" accept=".xls,.xlsx" placeholder="Upload document"
+                            title=" " ngDefaultControl (change)="uploadTraineeList($event)" />
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-5">
+                    <ag-grid-angular style="width: 100%; height: 50vh;"
+                        (firstDataRendered)="onFirstDataRendered($event)" class="ag-theme-alpine grid px-2 mt-2"
+                        [animateRows]="true" [rowData]="employeeList" [gridOptions]="gridOptionsEmployee"
+                        [columnDefs]="columnDefsEmployee" [frameworkComponents]="frameworkComponents"
+                        [animateRows]="true" [pagination]="true" (gridReady)="onGridReady($event)">
+                    </ag-grid-angular>
+                </div>
+
+                <div class="mt-5">
+                    <button type="button" class="btn btn-blue pull-right mx-0">
+                        Save Info.
+                    </button>
+                </div>
+
+                <div class="flex mt-5" style="width: 102%;">
+                    <div class="left mt-3" style="margin-left: -2rem">
+                        <div style="display: flex;">
+                            <button type="button" class="btn btn-primary-blue pull-left mx-2 mt-3" (click)="previous()">
+                                Previous
+                            </button>
+                        </div>
+                    </div>
+                    <div class="right mt-3">
+                        <button type="button" class="btn btn-primary pull-right mx-3 mt-3" (click)="next()">
+                            Final Submit
+                        </button>
+                        <button type="button" class="btn btn-danger pull-right mt-3" (click)="cancelBatchInfoForm()">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+.modal-content{
+    margin-top: 120% !important;
+  }
+  
+  .modal-backdrop.show{
+    opacity: 0 !important;
+    }
+    
+  .row-buttons {
+      margin-top: 20px;
+      // margin-bottom: 100px !important;
+      margin-left: 17px;
+      margin-right: 53px;
+      float: right;
+      display: flex;
+      justify-content: space-between;
+    }
+  
+  
+    .form-control.ng-valid{
+      border-color: lightgray;
+      background-image: none;
+    }
+  
+  
+    .form-control.ng-invalid{
+      background-image: none;
+      border-color: lightgray
+    }
+    
+    .text-muted { color: red !important; }
+  
+    .inputField{
+      width:31px;
+      cursor: pointer; 
+      border: none;
+      outline: none;
+      color: #005391;
+      font-weight: bold;
+     
+    }
+  
+    .inpt{
+      max-width: 15%;
+       border: none; 
+       outline: none;
+       font-weight: bold;
+       text-align: center;
+    }
+    
+    .no-border {
+      border: none;
+    }
+  
+    .inpt1{
+     max-width: 12%;
+     border: none; 
+     outline: none;
+     font-weight: bold;
+     text-align: center;
+    }
+
+    input[type=radio] {
+      width: 19px;
+      height: 19px;
+      cursor: pointer;
+    
+  }

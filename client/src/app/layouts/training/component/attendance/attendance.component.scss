@@ -1,0 +1,12 @@
+.form-control.ng-valid{
+    border-color: lightgray;
+    background-image: none;
+  }
+
+  .form-control.ng-invalid{
+    background-image: none;
+    border-color: lightgray
+  }
+  
+  .text-muted { color: red !important; }
+  

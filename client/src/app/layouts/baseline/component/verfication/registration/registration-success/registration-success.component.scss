@@ -1,0 +1,213 @@
+
+  .bgWhite{
+    box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;
+    padding: 5%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem
+  }
+
+  .bg-image{
+    position: fixed;
+    min-height: 100%;
+    min-width: 100%;
+    zoom: 75%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+  }
+
+  .container{
+        
+  }
+ 
+
+  input{
+    margin: 5px;
+  }
+
+  .text-danger{
+    cursor: pointer;
+  }
+  
+  .title{
+    font-weight:600;
+    margin-top:20px;
+    font-size:24px;
+   color: #234280;
+  }
+  
+  .customBtn{
+    border-radius:0px;
+    padding:10px;
+  }
+  
+  form input{
+    display:inline-block;
+    width:50px;
+    height:50px;
+    text-align:center;
+  }
+
+//   .card {
+//   width: 350px;
+//   padding: 10px;
+//   border-radius: 20px;
+//   background: #fff;
+//   border: none;
+//   height: 350px;
+//   position: relative;
+// }
+
+.container {
+  height: 80vh;
+}
+
+
+.mobile-text {
+  color: #989696b8;
+  font-size: 15px;
+}
+
+.form-control {
+  margin-right: 12px;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #ff8880;
+  outline: 0;
+  box-shadow: none;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+// .card {
+//   width: 350px;
+//   padding: 10px;
+//   border-radius: 20px;
+//   background: #fff;
+//   border: none;
+//   height: 350px;
+//   position: relative;
+// }
+
+// .container {
+//   height: 100vh;
+// }
+
+// body {
+//   background: #eee;
+// }
+
+
+
+// .form-control {
+//   margin-right: 12px;
+// }
+
+// .form-control:focus {
+//   color: #495057;
+//   background-color: #fff;
+//   border-color: #ff8880;
+//   outline: 0;
+//   box-shadow: none;
+// }
+
+// .cursor {
+//   cursor: pointer;
+// }
+// @media screen {
+//     @font-face {
+//         font-family: '';
+//         font-style: normal;
+//         font-weight: 400;
+//         src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+//     }
+
+//     @font-face {
+//         font-family: '';
+//         font-style: normal;
+//         font-weight: 700;
+//         src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v11/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+//     }
+
+//     @font-face {
+//         font-family: '';
+//         font-style: italic;
+//         font-weight: 400;
+//         src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v11/RYyZNoeFgb0l7W3Vu1aSWOvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+//     }
+
+//     @font-face {
+//         font-family: '';
+//         font-style: italic;
+//         font-weight: 700;
+//         src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYELO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+//     }
+// }
+
+/* CLIENT-SPECIFIC STYLES */
+
+// table,
+// td,
+// a {
+//     -webkit-text-size-adjust: 100%;
+//     -ms-text-size-adjust: 100%;
+// }
+
+// table,
+// td {
+//     mso-table-lspace: 0pt;
+//     mso-table-rspace: 0pt;
+// }
+
+// img {
+//     -ms-interpolation-mode: bicubic;
+// }
+
+// /* RESET STYLES */
+// img {
+//     border: 0;
+//     height: auto;
+//     line-height: 100%;
+//     outline: none;
+//     text-decoration: none;
+// }
+
+// table {
+//     border-collapse: collapse !important;
+// }
+
+
+// /* iOS BLUE LINKS */
+// a[x-apple-data-detectors] {
+//     color: inherit !important;
+//     text-decoration: none !important;
+//     font-size: inherit !important;
+//     font-family: inherit !important;
+//     font-weight: inherit !important;
+//     line-height: inherit !important;
+// }
+
+// /* MOBILE STYLES */
+// @media screen and (max-width:600px) {
+//     h1 {
+//         font-size: 32px !important;
+//         line-height: 32px !important;
+//     }
+// }
+
+// /* ANDROID CENTER FIX */
+// div[style*="margin: 16px 0;"] {
+//     margin: 0 !important;
+// }

@@ -1,0 +1,14 @@
+<div style="zoom: 85%;">
+<div class="modal-header">
+    <i class= "fa fa-exclamation-circle"></i>
+    <h4 class="modal-title px-2">{{ title }}</h4>
+    <i class="fa fa-times" aria-label="Close" (click)="dismiss()"></i>
+</div>
+<div class="modal-body">
+    {{ message }}
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="decline()">{{ btnCancelText }}</button>
+    <button type="button" class="btn btn-primary" (click)="accept()">{{ btnOkText }}</button>
+</div>
+</div>

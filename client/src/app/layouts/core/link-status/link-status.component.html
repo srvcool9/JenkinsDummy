@@ -1,0 +1,6 @@
+<a *ngIf="params.data.initiateTrainingStatus==='Pending'" class="link-primary" (click)="onLinkClick($event,params.inRouterLink)">
+    {{params.data.initiateTrainingStatus}}</a>
+
+<a *ngIf="params.data.initiateTrainingStatus.id===61 || params.data.initiateTrainingStatus.id===62" class="link-primary"
+    (click)="onLinkClick($event,params.inRouterLink)">
+    {{params.data.initiateTrainingStatus.entityName}}</a>

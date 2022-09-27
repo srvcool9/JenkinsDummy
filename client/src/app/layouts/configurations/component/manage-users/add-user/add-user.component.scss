@@ -1,0 +1,161 @@
+.uploadBox {
+    width: 407px;
+    height: 76px;
+    margin: 0 auto;
+    border: 2px dashed #c8ced3;
+    margin-top: 16px;
+    padding-top: 10px;
+  }
+
+  .border{    
+    border: 1px solid #C4C4C4;
+    height: 40%;
+  }
+
+  .border-Area{    
+    border: 1px solid #C4C4C4;
+    height: 50%;
+  }
+  
+  .fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    background: none;
+    border: 0;
+    color: #000;
+    width: 100%;
+    height: 72px;
+  }
+  .fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    width: 100%;
+    filter: alpha(opacity=0);
+    height: 76px;
+  }
+  .fileUpload.btn.btn-primary span {
+    color: #31aee7;
+    font-weight: bold;
+  }
+  .fileUpload.btn.btn-primary p {
+    font-size: 12px;
+    color: #dad7d7;
+  }
+  .fileUpload.btn.btn-primary:active {
+    background: none;
+  }
+  .model-header {
+    color: #4b4c4d;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .crossIcon button.filepond--file-action-button.filepond--action-remove-item {
+    opacity: 1 !important;
+  }
+  
+  .modal-body {
+    display: block;
+  }
+  .switch-secondary .switch-input:checked + .switch-slider {
+    background-color: #3da6fe;
+    border-color: #acb5bc;
+  }
+  
+  .switch-slider {
+    position: relative;
+    display: block;
+    height: inherit;
+    cursor: pointer;
+    background-color: #e7ebed;
+    border: 1px solid #c8ced3;
+    transition: 0.15s ease-out;
+    border-radius: 0.25rem;
+  }
+  .model-header .mt-4, .my-4 {
+    margin-top: 0rem !important;
+  }
+  
+  .saveButton{
+   margin-right: 50px;
+   visibility: visible;
+   background-color: blue;
+  }
+  .modal-dialog.modal-boxAdduser.modal-primary {
+    position: relative;
+    width: 100%;
+    margin-top: 0rem !important;
+    pointer-events: none;
+    top: 0px;
+    float: right;
+  }
+  .modal-dialog.modal-boxAdduser.modal-primary > .modal-content{
+    overflow-y: scroll;
+    height: 100vh;
+    border: none;
+  }
+  @media (min-width: 576px){
+    .modal-dialog {
+     max-width: 625px;
+  }
+  }
+  h5{
+    margin-bottom: 0px;
+    font-size: 20px;
+  }
+  input{
+    text-transform: capitalize;
+  }
+  .email input{
+    text-transform: lowercase;
+    }
+
+    .card {
+      padding-top: 0px;
+      // margin-top: 10px;
+      border: 1px solid #C4C4C4;
+    }
+
+    // .form-control.ng-valid{
+    //   border : none !important;
+    //   background-image: none !important;
+    // }
+    
+    .form-control[readonly]{
+      background-color: #fff !important;
+    }
+
+
+    .border{
+      border: none;
+    }
+
+    .display {
+      display: flex;
+      @media only all and (max-width:1067px) {
+        display: block !important;
+      }
+    }
+
+    .role {
+      .ng-select .ng-select-container {
+        height: 45px !important;
+        min-height: 46px !important;
+    }
+    }
+
+    .form-control.ng-invalid{
+      border-color: lightgray;
+      background-image: none;
+    }
+    
+    .form-control.ng-valid{
+      border-color: lightgray;
+      background-image: none;
+    }

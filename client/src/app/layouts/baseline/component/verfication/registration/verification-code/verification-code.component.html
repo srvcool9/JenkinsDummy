@@ -1,0 +1,29 @@
+<div>
+  <div class="modal-header">
+    <i class="fa fa-exclamation-circle"></i>
+    <h4 class="modal-title px-2">{{ title }}</h4>
+  </div>
+  <div class="modal-body">
+    <span class="mobile-text"> {{ message }} <b class="text-danger">{{mobileNumber}}</b></span>
+    <form [formGroup]="otpForm" class="mt-0">
+      <div style="text-align: center;">
+        <input class="otp mx-2" type="text" (input)='digitValidate($event)' formControlName="digit1"
+          (keyup)='tabChange(1)' maxlength=1>
+        <input class="otp" type="text" (input)='digitValidate($event)' formControlName="digit2" (keyup)='tabChange(2)'
+          maxlength=1>
+        <input class="otp" type="text" (input)='digitValidate($event)' formControlName="digit3" (keyup)='tabChange(3)'
+          maxlength=1>
+        <input class="otp" type="text" (input)='digitValidate($event)' formControlName="digit4" (keyup)='tabChange(4)'
+          maxlength=1>
+      </div>
+      <hr class="mt-3">
+      <div style="float: right;">
+        <button class='btn btn-primary mx-2' (click)="validate()">Validate</button>
+        <button type="button" class="btn btn-danger" (click)="decline()">{{ btnCancelText }}</button>
+      </div>
+      <div style="text-align: center;" class="mt-4">
+        <b class="text-danger text-danger-hover" (click)="resendOTP()">Resend OTP</b>
+      </div>
+    </form>
+  </div>
+</div>

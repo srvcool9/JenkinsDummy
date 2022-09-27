@@ -1,0 +1,163 @@
+<div class="bg-color">
+  <div class="row mx-2 mt-2 card">
+    <div class="col-sm-5 mt-2">
+      <h4 class="mb-3" style="color: #234280;font-weight: bold;">Associated Role</h4>
+    </div>
+
+    <div class="form">
+      <form [formGroup]="addUserForm">
+        <div class="">
+          <div class="">
+            <div class="responsive-display">
+              <div class="mx-0 col-md-6 card">
+                <div class="row  mx-2 mt-4 mb-3">
+                  <div class="col-md-6 mb-3">
+                    <label>Employee Unique ID: </label>
+                    <input type="text" class="form-control border mt-2" formControlName="empCode" [readonly]="true" />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label>Name:</label>
+                    <input class="form-control border mt-2" formControlName="name" [readonly]="true" />
+                  </div>
+                  <div *ngIf="editSelectVisible!==true" class="col-md-6 mb-3 ">
+                    <label class="mb-2">Role</label>
+                    <ng-select placeholder="--Select--" [clearable]="false" [searchable]="false"
+                      [items]="filteredRoleRes" bindLabel="roleName" bindValue="roleId" [readonly]=addRoleFix
+                      (change)="selectedRole($event)" formControlName="role" class="role">
+                    </ng-select>
+                  </div>
+                  <div *ngIf="editSelectVisible===true" class="col-md-6 mb-3 ">
+                    <label class="mb-2 ">Role</label>
+                    <ng-select [clearable]="false" [searchable]="false" bindLabel="roleName" bindValue="roleName"
+                      [readonly]=true formControlName="role" class="role">
+                    </ng-select>
+                  </div>
+
+                  <div class="col-md-6 mb-4">
+                    <label class="mb-2 ">
+                      Type
+                    </label>
+                    <input class="form-control border-Area" [(ngModel)]="roleArea.roleTypeName" formControlName="type"
+                      [readonly]=true />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="mb-2 ">Status</label>
+                    <div class="form-check form-switch mx-1">
+                      <input class="form-check-input" type="checkbox" role="switch" [checked]="roleArea.status"
+                        id="flexSwitchCheckChecked" checked formControlName="isActive" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mx-0 col-md-6 card">
+                <h5 style="color: #234280;font-weight: bold;" class="mb-2 mt-2 mx-3">Area</h5>
+
+                <div class="responsive-display row mt-2 mx-2">
+                  <div class="responsive-display">
+                    <div class=" mb-3 col-6">
+                      <label class="mb-2">State</label><br />
+                      <div class="border-Area">
+                        <span class="px-2">{{ mp }}</span>
+                      </div>
+                    </div>
+                    <div class="mb-3 col-6 mx-2">
+
+                      <label class="mb-2">Division</label>
+                      <div class="border-Area" *ngIf="divisionCheck===true">
+                        <span class="px-2">{{divisionStaticList}}</span>
+                      </div>
+                      <div *ngIf="divisionCheck===false">
+                        <ng-select placeholder="--Select--" [clearable]="false" [searchable]="false"
+                          [items]="divisionData" bindLabel="name" bindValue="id" [readonly]="disableDivision"
+                          (change)="divisionOnChange($event)" formControlName="division">
+                        </ng-select>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="responsive-display">
+                    <div class="col-6 mb-3">
+
+                      <label class="mb-2">District</label>
+                      <div class="border" *ngIf="districtCheck===true">
+                        <span class="px-2">{{districtStaticList}}</span>
+                      </div>
+                      <div *ngIf="districtCheck===false">
+                        <ng-select placeholder="--Select--" [clearable]="false" [searchable]="false"
+                          [items]="districtData" [readonly]="disableDistrict" bindLabel="name" bindValue="id"
+                          (change)="districtOnChange($event)" formControlName="district">
+                        </ng-select>
+                      </div>
+
+                    </div>
+
+                    <div class="mx-2 col-6 mb-3">
+                      <input type="text" formControlName="empCode" hidden />
+
+                      <label class="mb-2">Block</label>
+                      <div class="border" *ngIf="blockCheck===true">
+                        <span class="px-2">{{blockStaticList}}</span>
+                      </div>
+                      <div *ngIf="blockCheck===false">
+                        <ng-select placeholder="--Select--" [clearable]="false" [searchable]="false" [items]="blockData"
+                          bindLabel="name" bindValue="id" [readonly]="disableBlock" (change)="blockOnChange($event)"
+                          formControlName="block">
+                        </ng-select>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="responsive-display">
+                    <div class="col-6 mb-3">
+
+                      <label class="mb-2">Cluster</label>
+                      <div class="border" *ngIf="clusterCheck===true">
+                        <span class="px-2">{{cluserStaticList}}</span>
+                      </div>
+                      <div *ngIf="clusterCheck===false">
+                        <ng-select placeholder="--Select--" [clearable]="false" [searchable]="false"
+                          [items]="clusterData" bindLabel="name" bindValue="id" [readonly]="disableCluster"
+                          (change)="clusterOnChange($event)" formControlName="cluster">
+                        </ng-select>
+                      </div>
+
+                    </div>
+                    <div class="col-6 mx-2">
+
+                      <label class="mb-2">School</label>
+                      <ng-select placeholder="--Select--" [clearable]="false" [searchable]="false" [items]="schoolData"
+                        bindLabel="name" bindValue="id" [readonly]="disableSchool" formControlName="school">
+                      </ng-select>
+                    </div>
+                  </div>
+                  <div class="row-buttons pt-4">
+                    <button type="button" class="btn btn-primary pull-right mx-3  mb-2" (click)="add()">
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: -webkit-center;" class="col-md-12">
+            <ag-grid-angular style="width: 70%; height: 40vh; text-align: initial;"
+              (firstDataRendered)="onFirstDataRendered($event)" class="ag-theme-alpine grid px-2 mt-2"
+              [animateRows]="true" [rowData]="areaList" [gridOptions]="gridOptions" [columnDefs]="columnDefs"
+              [frameworkComponents]="frameworkComponents" [animateRows]="true" [pagination]="true"
+              (gridReady)="onGridReady($event)">
+            </ag-grid-angular>
+          </div>
+          <div class="row-buttons mt-1 mb-5">
+            <button type="button" (click)="submit()" class="btn btn-primary mx-3 pull-right">
+              Save
+            </button>
+            <button type="button" class="btn btn-danger pull-right" (click)="cancel()">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+</div>

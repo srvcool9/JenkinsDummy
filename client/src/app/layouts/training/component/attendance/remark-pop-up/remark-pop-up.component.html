@@ -1,0 +1,36 @@
+<div class="modal-dialog modal-boxAdduser modal-primary" style="
+justify-content: center;
+" role="document">
+  <form class="form" [formGroup]="remarkForm">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #234280;justify-content: end;">
+        <i class="fa fa-times" aria-label="Close" (click)="closeModel()"></i>
+      </div>
+      <div class="modal-body">
+        <label class="text mb-4">Add a remark</label>
+        <div>
+          <textarea rows="2" class="form-control" placeholder="Enter remark" style="font-size: 18px; height: 80px;"
+            formControlName="remark"></textarea>
+          <small class="form-text text-muted font-validate" *ngIf="
+            !remark.valid && (remark.dirty || remark.touched)
+          ">
+            <span *ngIf="remark.errors['required']">Remark is a required field</span>
+            <span *ngIf="remark.errors['maxlength']">Maximum 50 characters allowed</span>
+          </small>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="row-buttons mt-1 mb-2">
+          <button type="button" class="btn btn-primary mx-3" (click)="onaddClick()" [disabled]="remarkForm.invalid">
+            Add
+          </button>
+          <button type="button" class="btn btn-danger" (click)="closeModel()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

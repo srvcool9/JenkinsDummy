@@ -1,0 +1,39 @@
+.fa-star{
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+
+.form-check-input.ng-valid:checked {
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+
+  .form-check-input:checked {
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+input[type=checkbox]{
+  border: transparent;
+  background-color: transparent;
+}
+
+
+//   input[type=checkbox] {
+//     display: none;
+//   }
+//   .label {
+//     border: 1px solid #000;
+//     display: inline-block;
+//     padding: 3px;
+//     /* background: url("unchecked.png") no-repeat left center; */ 
+//     /* padding-left: 15px; */
+//   }
+//   input[type=checkbox]:checked + .label {
+//     background: #f00;
+//     color: #fff;
+//     /* background-image: url("checked.png"); */
+//   }
+  

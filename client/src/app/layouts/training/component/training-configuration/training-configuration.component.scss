@@ -1,0 +1,447 @@
+/*form styles*/
+#msform  {
+  // text-align: center;
+  position: relative;
+}
+
+#error{
+  color: red;
+}
+
+.scrollbar-auto {
+ }
+
+.scroll{
+  overflow-y: scroll;
+}
+
+.notScroll{
+  
+}
+
+.col-7{
+  flex: 0 0 auto ;
+  width: 62.333333% !important;
+}
+
+.margin-x-9{
+  margin-left: -9rem;
+    margin-right: -9rem;
+}
+
+#msform fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  // width: 80%;
+  // margin: 0 10%;
+  /*stacking fieldsets above each other*/
+  position: relative;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+  display: none;
+}
+/*inputs*/
+#msform input,
+#msform textarea {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat;
+  color: #2c3e50;
+  font-size: 13px;
+}
+#msform input:focus,
+#msform textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #ee0979;
+  outline-width: 0;
+  transition: All 0.5s ease-in;
+  -webkit-transition: All 0.5s ease-in;
+  -moz-transition: All 0.5s ease-in;
+  -o-transition: All 0.5s ease-in;
+}
+/*buttons*/
+#msform .action-button {
+  width: 100px;
+  background: #ee0979;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+#msform .action-button:hover,
+#msform .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
+}
+#msform .action-button-previous {
+  width: 100px;
+  background: #c5c5f1;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #c5c5f1;
+}
+/*headings*/
+.fs-title {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+.fs-subtitle {
+  font-weight: normal;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+  // margin-bottom: 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  /*CSS counters to number the steps*/
+  counter-reset: step;
+}
+#progressbar a{
+  height: 5px;
+  background-color: #ee0979;
+  margin-top: 0.5rem !important;
+}
+.connector-visibility{
+  visibility: hidden;
+}
+#progressbar li {
+  list-style-type: none;
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  // width: 33.33%;
+  float: left;
+  position: relative;
+  letter-spacing: 1px;
+}
+
+.content{
+  list-style: none;
+   color: #234280; 
+   font-weight: 700;
+}
+
+
+#progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  display: block;
+  font-size: 14px;
+  color: #333;
+  background: white;
+  border-radius: 25px;
+  margin: 0 auto 10px auto;
+}
+
+#progressbar a:before{
+  background-color: #1f5a16;
+  height: 5px;
+  margin-top: 0.5rem !important;
+}
+
+
+#progressbar li:after {
+    width: 20px;
+    height: 20px;
+    color: #000;
+  }
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+  background: #1f5a16;
+  color: white;
+}
+
+#progressbar a.on {
+  background-color: #1f5a16;
+  height: 5px;
+  margin-top: 0.5rem !important;
+}
+
+#progressbar a.off {
+  background-color: #ee0979;
+  height: 5px;
+  margin-top: 0.5rem !important;
+}
+
+
+
+#progressbar li.inactive:before {
+  background:#e4e7ea;
+  color: #000;
+}
+fieldset {
+  /* for chrome and safari*/
+  -webkit-animation-duration: 0.25ms;
+  -webkit-animation-name: slidein;
+  /*for firefox*/
+  -moz-animation-duration: 1s;
+  -moz-animation-name: slidein;
+  /* for opera*/
+  -o-animation-duration: 1s;
+  -o-animation-name: slidein;
+  /* Standard syntax*/
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+@-webkit-keyframes slidein {
+  from {
+    margin-right: 100%;
+    width: 300%;
+  }
+  to {
+    margin-right: 0%;
+    width: 100%;
+  }
+}
+@-moz-keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+@-o-keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+.bar{
+    width: 16%;
+    height: 12px;
+    margin-bottom:0px;
+    border: 0.031em solid #eeeeee;
+    background-color: lightgray;
+    display: inline-block;
+    border-radius: 10px;
+    text-align: center;
+    margin:"0 auto";
+  }
+  .bar.active:after {
+    // background: #ee0979;
+    background-color: #1f5a16;
+    color: white;
+  }
+  .bar.inactive:before {
+    // background: burlywood;
+    background-color:#e4e7ea;
+    color: #000;
+  }
+  .btn-dark{
+    background-color: #005391;
+    border:#005391;
+    color: white; 
+    height: 32px;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+  
+
+  btn-dark{
+    background-color: #005391;
+    border:#005391;
+    color: white; 
+    height: 34px; 
+    margin-top: 5px;
+    cursor: pointer;
+  }
+
+  #msform input,
+#msform textarea {
+  padding: 5px;
+  padding-left: 30px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat;
+  color: #2c3e50;
+  font-size: 13px;
+}
+
+.form-control.ng-invalid{
+  background-image: none;
+  border-color: lightgray
+}
+
+.text-muted { color: red !important; }
+
+.form-control.ng-valid{
+  border-color: lightgray;
+  background-image: none;
+}
+
+  
+.nav-roles {
+  color: #ffffff;
+  background-color: #005391;
+  border: 0px;
+  height: 35px;
+  width: 130px;
+  border-radius: 0px 5px 5px 0px;
+}
+.nav-users {
+  color: #000000;
+  background-color: #eeeeee;
+  border: 1px solid #C4C4C4;
+  height: 35px;
+  width: 130px;
+  border-radius: 5px 0px 0px 5px;
+
+  margin-left: -4px;
+}
+
+
+
+.nav-roles1 {
+  color: #ffffff;
+  background-color: #005391;
+  border: 0px;
+  height: 35px;
+  width: 130px;
+  border-radius: 0px 0px 0px 0px;
+}
+.nav-users1 {
+  color: #000000;
+  background-color: #eeeeee;
+  border: 1px solid #C4C4C4;
+  height: 35px;
+  width: 130px;
+  border-radius: 0px 0px 0px 0px;
+
+  margin-left: -4px;
+}
+
+.blue1{
+  color: #ffffff;
+  background-color: #005391;
+  border: 0px;
+  height: 35px;
+  width: 130px;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.grey1{
+  color: #000000;
+  background-color: #eeeeee;
+  border: 0px;
+  border: 1px solid #C4C4C4;
+  height: 35px;
+  width: 130px;
+  border-radius: 5px 0px 0px 5px;
+}
+
+
+.blue2{
+  color: #ffffff;
+  background-color: #005391;
+  border: 0px;
+  height: 35px;
+  width: 130px;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.grey2{
+  color: #000000;
+  background-color: #eeeeee;
+  border: 0px;
+  border: 1px solid #C4C4C4;
+  width: 130px;
+  height: 35px;
+  border-radius: 0px 5px 5px 0px;
+}
+
+// input[type=number]{
+//   font-size: 17px !important;
+// }
+
+// input[type=text]{
+//   font-size: 17px !important;
+// }
+
+
+.input:focus {
+  outline: none !important;
+  border:1px solid #719ECE  !important;
+  box-shadow: 0 0 10px #719ECE !important;
+}
+
+.fa-edit{
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #005391;
+}
+
+.fa-save,.fa-trash{
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #005391;
+}
+
+.margin-x-8 {
+  margin-left: 8rem;
+  margin-right: 10rem;
+}
+
+.mx-10-5{
+  margin-left: 10.5rem!important;
+  margin-right: 10.5rem!important;
+}
+
+.mx-four{
+  margin-left: 4rem !important;
+  margin-right: 4rem !important;
+}

@@ -1,0 +1,25 @@
+
+ <div class="text-center align-middle">
+    <ng-template #popTemplate>
+        <span #pop>
+            <ul class="ul-in-tooptip">
+              <ng-container *ngFor="let area of areas">
+                <li >{{ area.areaName}}</li>
+              </ng-container>
+            </ul>
+          </span>
+      </ng-template> 
+    </div>
+
+
+<div *ngIf="areaLenght; else elseArea">
+  <strong
+    style="cursor: pointer; color: #005391"
+    [ngbPopover]="popTemplate"
+    placement="left"
+    container="body"
+    popoverClass="tooltip-text"
+    >{{ areaLenght }}</strong
+  >
+</div>
+<ng-template #elseArea>No Areas</ng-template>

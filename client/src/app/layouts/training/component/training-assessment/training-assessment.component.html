@@ -1,0 +1,34 @@
+<div class="animated fadeIn
+">
+
+
+    <div class="responsive-display justify-content-between mt-3 mx-2">
+        <div class="col-sm-3 grid-header">
+            <h4 style="font-weight: bold;" class="headingColor">Training Test</h4>
+        </div>
+    </div>
+    <div class="card-header mt-2">
+    </div>
+    <div class="grid-card-body">
+        <ag-grid-angular style="width: 100%; height: 73vh;" (firstDataRendered)="onFirstDataRendered($event)"
+            class="ag-theme-alpine" [animateRows]="true" [rowData]="rowDataAssessment" [gridOptions]="gridOptions"
+            [columnDefs]="columnDefs" [frameworkComponents]="frameworkComponents"
+            [paginationPageSize]="paginationPageSize" [animateRows]="true" [pagination]="true"
+            (gridReady)="onGridReady($event,value)">
+        </ag-grid-angular>
+        <div class="py-2 pl-4 border-top">
+            <p class="mb-0">
+                {{'total_records'|translate}} <strong> {{recordCount}}</strong>
+                <span class="select-rec-count-position">
+                    <strong> {{'select_record_count'|translate}} </strong>
+                    <span class="ml-5">
+                        <select #t (change)="callType(t.value)">
+                            <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                        </select>
+                    </span>
+                </span>
+            </p>
+        </div>
+    </div>
+    <!-- </div> -->
+</div>

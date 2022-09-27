@@ -1,0 +1,163 @@
+<div class="modal-dialog modal-boxAdduser modal-primary" role="document">
+    <form class="form" [formGroup]="addTrainingForm">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #234280">
+                <h3 class="modal-title mx-5 mt-2 mb-2" style="color: white;font-weight: bold;">{{trainingTitle}}</h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row mb-2 mt-4">
+                    <input type="text" hidden formControlName="trainingId" />
+                    <input type="text" hidden formControlName="status"/>
+                    <div class="col-md-3 form-group mt-1 mx-5">
+                        <label class="mb-2 font-increase">Group Name <i class="asterik">*</i></label>
+                    </div>
+                    <div class="col-md-6">
+                        <ng-select placeholder="Select Group" [clearable]="false" [searchable]="false"
+                            [dropdownPosition]="'bottom'" [items]="groups" bindLabel="groupName" bindValue="groupId"
+                            formControlName="group" name="ok" (change)="selectedGroup($event)">
+                        </ng-select>
+                        <small class="form-text text-muted font-validate" *ngIf="!group.valid && (group.dirty || group.touched)
+                      ">
+
+                            <span *ngIf="group.errors['required']">Group Name is required</span>
+                        </small>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-4">
+                    <div class="col-md-3 form-group mt-1 mx-5">
+                        <label class="mb-2 font-increase">Sub Group Name <i class="asterik">*</i></label>
+                    </div>
+                    <div class="col-md-6">
+                        <ng-select placeholder="Select Sub-Group" [clearable]="false" [searchable]="false"
+                            [dropdownPosition]="'bottom'" [items]="subGroups" bindLabel="subGroupName" bindValue="subGroupId"
+                            formControlName="subGroup" name="ok">
+                        </ng-select>
+
+                        <small class="form-text text-muted font-validate" *ngIf="!subGroup.valid && (subGroup.dirty || subGroup.touched)
+                        ">
+                            <span *ngIf="subGroup.errors['required']">Sub-Group Name is required</span>
+                        </small>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-4">
+                    <div class="col-md-3 form-group mt-3 mx-5">
+                        <label class="mb-2 font-increase">Training <i class="asterik">*</i> </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control font-increase" placeholder="Enter Training Name"
+                            formControlName="training" />
+                        <small class="form-text text-muted font-validate" *ngIf="
+                 !trainings.valid &&
+                 (trainings.dirty || trainings.touched)
+               ">
+                            <span *ngIf="trainings.errors['required']">
+                                Training name is required
+                            </span>
+                            <span *ngIf="trainings.errors['maxlength']">
+                                Maximum 50 characters allowed
+                            </span>
+                        </small>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-4">
+                    <div class="col-md-3 form-group mt-1 mx-5">
+                        <label class="mb-2 font-increase">Training Level </label>
+                    </div>
+                    <div class="col-md-6">
+                        <ng-select placeholder="Select Training Level" [clearable]="false" [searchable]="false"
+                            [dropdownPosition]="'bottom'" [items]="level" bindLabel="name" bindValue="id"
+                            formControlName="trainingLevel" name="ok">
+                        </ng-select>
+                        <small class="form-text text-muted font-validate" *ngIf="
+                 !description.valid &&
+                 (description.dirty || description.touched)
+               ">
+                            <span *ngIf="description.errors['maxlength']">
+                                Maximum 250 characters allowed
+                            </span>
+                        </small>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-4">
+                    <div class="col-md-3 form-group mt-1 mx-5">
+                        <label class="mb-2 font-increase">Approx. Trainee</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="number" class="form-control font-increase" placeholder="Enter Approx. Trainee"
+                        min="1"
+                            formControlName="approxTrainee" />
+                        <small class="form-text text-muted font-validate" *ngIf="
+                 !description.valid &&
+                 (description.dirty || description.touched)
+               ">
+                            <span *ngIf="description.errors['maxlength']">
+                                Maximum 250 characters allowed
+                            </span>
+                        </small>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-4">
+                    <div class="col-md-3 form-group mt-1 mx-5">
+                        <label class="mb-2 font-increase">Start Date </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="date" class="form-control" formControlName="startDate"
+                            placeholder="Enter Description" (change)="getStartDate($event)" />
+                    </div>
+                </div>
+                <div class="row mb-2 mt-4">
+                    <div class="col-md-3 form-group mt-1 mx-5">
+                        <label class="mb-2 font-increase">End Date </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="date" class="form-control" formControlName="endDate"
+                        (change)="getEndDate($event)"
+                            placeholder="Enter Description" />
+                            <small id="error"></small>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-4">
+                    <div class="col-md-3 form-group mt-1 mx-5">
+                        <label class="mb-2 font-increase">Description </label>
+                    </div>
+                    <div class="col-md-6">
+                        <textarea rows="2" class="form-control font-increase" placeholder="Enter Description"
+                            style="height: 100px;" formControlName="description"></textarea>
+                        <small class="form-text text-muted font-validate" *ngIf="
+                 !description.valid &&
+                 (description.dirty || description.touched)
+               ">
+                            <span *ngIf="description.errors['maxlength']">
+                                Maximum 250 characters allowed
+                            </span>
+                        </small>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-4">
+                    <div class="col-md-3 form-group mt-1 mx-5">
+                        <label class="mb-2 font-increase">Status</label>
+                    </div>
+                    <div class="form-check form-switch mt-1 mx-3 col-md-5">
+                        <input class="form-check-input status" type="checkbox" role="switch"
+                            formControlName="isActive" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <div class="row-buttons mt-4 mb-5">
+                    <button type="button" class="btn btn-primary mx-3" (click)="save()" style="font-size: 17px;"
+                        [disabled]="addTrainingForm.invalid">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="closeModel()" style="font-size: 17px;">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

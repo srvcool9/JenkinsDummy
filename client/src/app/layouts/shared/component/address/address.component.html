@@ -1,0 +1,63 @@
+<form [formGroup]="addressFormFields" class="auth-login-form auth-validate-form">
+  <div class="display-flex flex-direction-row row-container">
+    <div class="display-flex flex-direction-column width-33" data-validate="Organization Name is required">
+      <label class="form-label control-label">{{
+        "Address" | translate
+        }}</label>
+      <textarea class="form-control text-area" style="padding: 6px 0px 0px 10px;" type="textarea"
+        formControlName="addressText" rows="5" placeholder="Address"></textarea>
+      <span class="form-txt-input-focus"></span>
+    </div>
+    <div class="width-67">
+      <div class="display-flex flex-direction-row ">
+        <div class="display-flex flex-direction-column width-50" data-validate="Pan Number is required">
+          <label class="form-label control-label">{{
+            "Pincode" | translate
+            }}</label>
+          <input class="form-control input" type="text" formControlName="pincode" placeholder="Pincode"
+            style="padding-left: 10px;">
+          <span class="form-txt-input-focus"></span>
+        </div>
+        <div formGroupName="country" class="display-flex flex-direction-column width-50 "
+          data-validate="Pan Number is required">
+          <label class="form-label control-label">{{"Country" | translate }}</label>
+          <ng-select #country (change)="selectState($event)" [items]="countryArr" id="countryInfo" bindValue="id"
+            bindLabel="name" formControlName="id" placeholder="Select Country"
+            class="input">
+          </ng-select>
+          <span class="form-txt-input-focus"></span>
+        </div>
+      </div>
+      <div class="display-flex flex-direction-row row-container">
+        <div formGroupName="state" class="display-flex flex-direction-column width-50"
+          data-validate="Pan Number is required">
+          <label class=" control-label">{{ "State" | translate }}</label>
+          <div>
+            <ng-select #state (change)="selectCity($event)" placeholder="Select State"
+              [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedState" formControlName="id" class="input">
+              <ng-option *ngFor="let state of stateArr" [value]="state.id">
+                {{ state.name }}
+              </ng-option>
+            </ng-select>
+          </div>
+          <span class="form-txt-input-focus"></span>
+        </div>
+        <div formGroupName="city" class="display-flex flex-direction-column width-50"
+          data-validate="Pan Number is required">
+          <label class="form-label control-label">{{
+            "City" | translate
+            }}</label>
+          <div>
+            <ng-select #city (change)="selectCity($event)" placeholder="Select City"
+              [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedCity" formControlName="id" class="input">
+              <ng-option *ngFor="let city of cityArr" [value]="city.id">
+                {{ city.name }}
+              </ng-option>
+            </ng-select>
+          </div>
+          <span class="form-txt-input-focus"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

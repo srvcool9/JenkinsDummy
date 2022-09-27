@@ -1,0 +1,94 @@
+<div class="modal-dialog modal-boxAdduser modal-primary" role="document">
+    <form class="form" [formGroup]="addGroupForm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title mx-5 mt-3 mb-3" style="color: #234280;font-weight: bold;">{{sectionTitle}}</h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row mb-2 mt-5">
+                    <input type="text" hidden formControlName="sectionId" />
+                    <div class="col-md-3 form-group mt-2 mx-5">
+                        <label class="mb-2 font-increase"><i
+                            class="asterik">*</i> Section </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Enter Section"
+                            formControlName="section" />
+                        <small class="form-text text-muted font-validate" *ngIf="
+                          !section.valid && (section.dirty || section.touched)
+                        ">
+                            <span *ngIf="section.errors['required']">Section is a required field</span>
+                            <span *ngIf="section.errors['pattern']">{{'addGroup.alpha'|translate}}</span>
+                            <span *ngIf="section.errors['minlength']">{{'addGroup.min'|translate}}</span>
+                            <span *ngIf="section.errors['maxlength']">{{'addGroup.max'|translate}}</span>
+                        </small>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-5">
+                    <input type="text" hidden />
+                    <div class="col-md-3 form-group mt-2 mx-5">
+                        <label class="mb-2 font-increase">{{'addGroup.descrip'|translate}} </label>
+                    </div>
+                    <div class="col-md-6">
+                        <textarea maxlength="250" rows="2" class="form-control font-increase"
+                            placeholder="Enter Group Description" style="height: 350px; font-size: 18px;"
+                            formControlName="description"></textarea>
+                        <small class="form-text text-muted font-validate" *ngIf="
+                 !description.valid &&
+                 (description.dirty || description.touched)
+               ">
+                            <span *ngIf="description.errors['maxlength']">
+                                Maximum 250 characters allowed
+                            </span>
+                        </small>
+                    </div>
+                </div>
+
+
+                <!-- <div class="row mb-2 mt-5">
+                    <div class="col-md-3 form-group mt-2 mx-5">
+                        <label class="mb-2 font-increase"><i class="asterik">*</i> Purpose </label>
+                    </div>
+                    <div class="col-md-6">
+                        <ng-select placeholder="Select Purpose" [clearable]="false" [searchable]="true"
+                            [dropdownPosition]="'bottom'" [items]="purpose" bindLabel="name" bindValue="id"
+                            formControlName="purpose" name="ok">
+                        </ng-select>
+                        <small class="form-text text-muted font-validate" *ngIf="
+                          !purposes.valid && (purposes.dirty || purposes.touched)
+                        ">
+                            <span *ngIf="purposes.errors['required']">Purpose is a required field</span>
+                        </small>
+                    </div>
+                </div> -->
+
+
+                <div class="row mb-2 mt-5">
+                    <input type="text" hidden />
+                    <div class="col-md-3 form-group mt-2 mx-5">
+                        <label class="mb-2 font-increase"> {{'addGroup.status'|translate}}</label>
+                    </div>
+                    <div class="form-check form-switch mt-2 mx-3 col-md-5">
+                        <input class="form-check-input status" type="checkbox" role="switch"
+                            formControlName="isActive" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <div class="row-buttons mt-4 mb-5 mx-5">
+                    <button type="button" class="btn btn-primary mx-3" (click)="save()"
+                        [disabled]="addGroupForm.invalid" style="font-size: 18px;">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="cancel()" style="font-size: 18px;">
+                        {{'addGroup.cancel'|translate}}
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

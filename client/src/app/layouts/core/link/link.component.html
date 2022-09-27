@@ -1,0 +1,7 @@
+<div *ngIf="params.data.configured.entityName">
+    <a class="link-primary" (click)="onLinkClick($event,params.inRouterLink)">{{params.data.configured.entityName}}</a>
+</div>
+
+<div *ngIf="params.data.status">
+    <a class="link-primary" (click)="onLinkClick($event,params.inRouterLink)">{{params.data.status}}</a>
+</div>

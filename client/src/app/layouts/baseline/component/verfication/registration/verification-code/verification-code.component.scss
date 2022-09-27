@@ -1,0 +1,160 @@
+
+  .bgWhite{
+    box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;
+    padding: 5%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem
+  }
+
+  input{
+    margin: 5px;
+  }
+
+  .bg-img{
+    background-image: url("../../../../../../../assets//images/form.jpg");
+    position: fixed; 
+  top: 0; 
+  left: 0; 
+zoom: 85%;
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+  }
+  
+  .text-danger{
+    cursor: pointer;
+  }
+
+  .text-danger-hover:hover{
+    text-decoration:underline;
+  }
+
+  .btn-primary{
+    background-color: #1f5a16 !important;
+    border-color: #1f5a16 !important;
+  }
+  
+  .title{
+    font-weight:600;
+    margin-top:20px;
+    // font-size:24px;
+   color: #234280;
+  }
+  
+  .customBtn{
+    border-radius:0px;
+    padding:10px;
+  }
+  
+  form input{
+    display:inline-block;
+    width:50px;
+    height:50px;
+    text-align:center;
+  }
+
+//   .card {
+//   width: 350px;
+//   padding: 10px;
+//   border-radius: 20px;
+//   background: #fff;
+//   border: none;
+//   height: 350px;
+//   position: relative;
+// }
+
+.container {
+  height: 80vh;
+}
+
+
+.mobile-text {
+  color: #989696b8;
+  font-size: 15px;
+}
+
+.form-control {
+  margin-right: 12px;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #ff8880;
+  outline: 0;
+  box-shadow: none;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+// .card {
+//   width: 350px;
+//   padding: 10px;
+//   border-radius: 20px;
+//   background: #fff;
+//   border: none;
+//   height: 350px;
+//   position: relative;
+// }
+
+// .container {
+//   height: 100vh;
+// }
+
+// body {
+//   background: #eee;
+// }
+
+
+
+// .form-control {
+//   margin-right: 12px;
+// }
+
+// .form-control:focus {
+//   color: #495057;
+//   background-color: #fff;
+//   border-color: #ff8880;
+//   outline: 0;
+//   box-shadow: none;
+// }
+
+// .cursor {
+//   cursor: pointer;
+// }
+
+.modal-header {
+  color: #fff;
+  background-color: #005391;
+
+}
+.modal-footer{
+  padding: 1%;
+}
+.modal-title{
+  float: left;
+  margin-right: auto;
+}
+
+.fa-exclamation-circle{
+  font-size: 30px;
+}
+
+.row-buttons {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  margin-left: 17px;
+  margin-right: 53px;
+  float: right;
+  display: flex;
+  justify-content: space-between;
+}

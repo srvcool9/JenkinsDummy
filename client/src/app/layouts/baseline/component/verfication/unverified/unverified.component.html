@@ -1,0 +1,57 @@
+<div class="animated fadeIn">
+    <!-- <div class="card"> -->
+
+    <div class="responsive-display justify-content-between mt-3 mx-2 ">
+        <div class="col-sm-3 grid-header">
+            <h4 style="font-weight: bold;" class="headingColor">{{'unverified.enrolled'|translate}}</h4>
+        </div>
+        <div class="">
+            <div class="input-group d-flex">
+                <input type="search" maxlength="20" autocomplete="off" name="focus" [(ngModel)]="groupFilter"
+                    (keyup)="quickSearch()" (search)="clearSearch($event)" style="height: auto;" id="border" placeholder="  Search" />
+
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fa fa-search"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-header">
+        <div class="col-12 responsive-display  justify-content-between">
+            <nav class="navigation-item mb-2 mt-2">
+                <button routerLink="../unverified" class="nav-roles">
+                    {{'unverified.unverified'|translate}}
+                </button>
+                <button routerLink="../verified" class="nav-users">
+                    {{'unverified.verified'|translate}}
+                </button>
+            </nav>
+        </div>
+    </div>
+    <div class="grid-card-body">
+        <ag-grid-angular style="width: 100%; height: 73vh;" (firstDataRendered)="onFirstDataRendered($event)"
+            class="ag-theme-alpine" [animateRows]="true" [rowData]="unverifiedList" [gridOptions]="gridOptions"
+            [columnDefs]="columnDefs" [frameworkComponents]="frameworkComponents"
+            [paginationPageSize]="paginationPageSize" [animateRows]="true" [pagination]="true"
+            (gridReady)="onGridReady($event,value)">
+        </ag-grid-angular>
+        <div class="py-2 pl-4 border-top">
+            <p class="mb-0">
+                {{'total_records'|translate}} <strong> {{recordCount}}</strong>
+                <span class="select-rec-count-position">
+                    <strong> {{'select_record_count'|translate}} </strong>
+                    <span class="ml-5">
+                        <select #t (change)="callType(t.value)">
+                            <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                        </select>
+                    </span>
+                </span>
+            </p>
+        </div>
+
+
+    </div>
+    <!-- </div> -->
+</div>

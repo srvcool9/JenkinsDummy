@@ -1,0 +1,191 @@
+<div class="row mx-1 mt-2 mb-2">
+  <div class="mx-1 card">
+    <div class="col-12">
+      <h3 class="mb-3" style="color: #234280;font-weight: bold;">Allocation</h3>
+    </div>
+    <div class="col-sm-5">
+      <h5 class="mb-3 mt-2 text-color-blue">Personal Information</h5>
+    </div>
+    <form [formGroup]="allocationdDetailForm">
+      <input type="text" formControlName="allocationId" hidden />
+      <div class="row mx-1">
+        <input type="text" class="form-control" formControlName="enumeratorId" hidden="dis" />
+        <div class="col-3">
+          <label class="mb-2">Name </label>
+          <input type="text" class="form-control" formControlName="enumeratorName" placeholder="Enter Name" readonly />
+        </div>
+        <div class="col-3">
+          <label class="mb-2">DOB</label>
+          <input type="date" class="form-control" [(ngModel)]="dob" formControlName="dateOfBirth"
+            placeholder="Enter Description" readonly />
+        </div>
+        <div class="col-3">
+          <label class="mb-2">Mobile Number </label>
+          <input type="text" class="form-control" formControlName="mobile" placeholder="Enter mobile number" readonly />
+        </div>
+        <div class="col-3">
+          <label class="mb-2">Email</label>
+          <input type="email" class="form-control" formControlName="email" placeholder="Enter email" readonly />
+        </div>
+      </div>
+      <div class="row mt-3 mx-1">
+        <div class="col-3">
+          <label class="mb-2">Father's Name </label>
+          <input type="text" class="form-control" formControlName="fatherName" placeholder="Enter father's name"
+            readonly />
+        </div>
+        <div class="col-3">
+          <label class="mb-2">Highest Qualification </label>
+          <input type="text" class="form-control" formControlName="higherQualification"
+            placeholder="Enter higher qualification" readonly />
+        </div>
+        <div class="col-3">
+          <label class="mb-2">Institutional District </label>
+          <ng-select placeholder="Select Institutional District" [clearable]="false" [searchable]="false"
+            [items]="districtList" [dropdownPosition]="'bottom'" bindLabel="districtName" bindValue="districtId"
+            [readonly]="readonly" formControlName="institutionDistrict" name="ok">
+          </ng-select>
+        </div>
+        <div class="col-3">
+          <label class="mb-2">Institution Name </label>
+          <ng-select placeholder="Select Institution Name" [clearable]="false" [searchable]="false"
+            [readonly]="readonly" [dropdownPosition]="'bottom'" bindLabel="institutionName" bindValue="institutonId"
+            [items]="institutionName" formControlName="institutionName" name="ok">
+          </ng-select>
+        </div>
+      </div>
+      <div class="row mt-3 mx-1">
+        <div class="col-3">
+          <label class="mb-2">Grade</label>
+          <input type="text" class="form-control" formControlName="grade" placeholder="Enter Grade" readonly />
+        </div>
+        <div class="col-9">
+          <label class="mb-2">Residential Address </label>
+          <input type="text" class="form-control" formControlName="residentialAddress"
+            placeholder="Enter Residential Address" readonly />
+        </div>
+      </div>
+      <div class="row mt-3 mx-1">
+        <div class="col-4">
+          <label class="mb-2">District </label>
+          <ng-select placeholder="Select District" [clearable]="false" [searchable]="false"
+            [dropdownPosition]="'bottom'" [items]="districtList" bindLabel="districtName" bindValue="districtId"
+            [readonly]="readonly" formControlName="district" name="ok">
+          </ng-select>
+        </div>
+        <div class="col-4">
+          <label class="mb-2">Block </label>
+          <ng-select placeholder="Select Block" [clearable]="false" [searchable]="false" [dropdownPosition]="'bottom'"
+            [items]="blocks" bindLabel="blockName" bindValue="blockId" [readonly]="readonly" formControlName="block"
+            name="ok">
+          </ng-select>
+        </div>
+        <div class="col-4">
+          <label class="mb-2">Supporting Document (if any) </label>
+          <input type="file" class="form-control" accept="application/pdf" formControlName="supportingDocument"
+            placeholder="Upload document" [attr.disabled]="true" />
+          <small class="form-text text-muted-file">Maximum upload file size : 2MB</small>
+        </div>
+      </div>
+
+      <div class="col-sm-5 mt-3">
+        <h5 class="mb-3 text-color-blue">Allocation Information</h5>
+      </div>
+      <div class="row mt-3 mx-1">
+        <div class="col-3">
+          <label class="mb-2">Assessment Group</label>
+          <ng-select placeholder="Select Institutional District" [clearable]="false" [searchable]="false"
+            [dropdownPosition]="'bottom'" (change)="getAssessmentNames($event)" bindLabel="groupName"
+            bindValue="groupId" formControlName="group" [items]="group" name="ok">
+          </ng-select>
+        </div>
+        <div class="col-3">
+          <label class="mb-2">Assessment Name</label>
+          <ng-select placeholder="Select Institutional District" [clearable]="false" [searchable]="false"
+            [dropdownPosition]="'bottom'" bindLabel="assessmentName" bindValue="assessmentId"
+            (change)="getAssessmentDetail($event)" name="ok" formControlName="assessmentId" [items]="asmtNames">
+          </ng-select>
+        </div>
+        <div class="col-3">
+          <label class="mb-2">Assessment Start Date</label>
+          <input type="date" class="form-control" [(ngModel)]="startDate" formControlName="startDate" readonly />
+        </div>
+        <div class="col-3">
+          <label class="mb-2">Assessment End Date </label>
+          <input type="date" class="form-control" [(ngModel)]="endDate" formControlName="endDate" readonly />
+        </div>
+      </div>
+      <div class="row mt-3 mx-1">
+        <div class="col-3">
+          <label class="mb-2">Select class</label>
+          <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="classList" formControlName="class">
+          </ng-multiselect-dropdown>
+        </div>
+        <div class="col-3">
+          <label class="mb-2">Select District</label>
+          <div class="border" *ngIf="districtCheck === true">
+            <span class="px-2">{{ districtStaticList }}</span>
+          </div>
+          <div *ngIf="districtCheck === false">
+            <ng-select placeholder="Select Institutional District" [clearable]="false" [searchable]="false"
+              formControlName="asmtDistrict" [dropdownPosition]="'bottom'" (change)="getBlockByDistrict($event)"
+              bindLabel="name" bindValue="id" [items]="district" name="ok">
+            </ng-select>
+          </div>
+        </div>
+        <div class="col-3">
+          <label class="mb-2">Select Block</label>
+          <div class="border" *ngIf="blockCheck===true">
+            <span class="px-2">{{blockStaticList}}</span>
+          </div>
+          <div *ngIf="blockCheck===false">
+            <ng-select placeholder="Select Institutional District" [clearable]="false" [searchable]="false"
+              [dropdownPosition]="'bottom'" bindLabel="name" bindValue="id" (change)="getSchoolByBlock($event)"
+              [items]="blockData" formControlName="asmtBlock" name="ok">
+            </ng-select>
+          </div>
+        </div>
+        <!-- <div class="col-3">
+        <label class="mb-2">Select Cluster</label>
+        <ng-select placeholder="Select Institutional District" [clearable]="false" [searchable]="false"
+          [dropdownPosition]="'bottom'" bindLabel="name" bindValue="id" [items]="cluster" formControlName="cluster"
+          name="ok">
+        </ng-select>
+      </div> -->
+
+
+        <div class="col-3">
+          <label class="mb-2">Select School</label>
+          <ng-select placeholder="Select School" [clearable]="false" [searchable]="false" [dropdownPosition]="'bottom'"
+            bindLabel="name" bindValue="id" formControlName="schoolId" [items]="school" name="ok">
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="row-buttons" *ngIf="unallocated">
+        <input type="submit" value="Allocate" class="btn btn-primary1 mx-0 mt-3 mx-3" (click)="allocate()"
+          [disabled]="allocationdDetailForm.invalid" />
+        <input type="submit" value="Cancel" class="btn btn-danger mx-0 mt-3" (click)="cancel()" />
+      </div>
+
+
+
+      <div class="row-buttons" *ngIf="allocated">
+        <input type="submit" value="Save" class="btn btn-primary1 mx-0 mt-3 mx-3" (click)="allocate()"
+          [disabled]="allocationdDetailForm.invalid" />
+        <input type="submit" value="Cancel" class="btn btn-danger mx-0 mt-3" (click)="cancelBtn()" />
+      </div>
+    </form>
+
+    <div>
+    <button class="accordion" *ngIf="allocated">Details</button>
+    <div class="panel" #panel *ngIf="allocated">
+      <ag-grid-angular style="width: 100%; height: 50vh" class="ag-theme-alpine" [animateRows]="true"
+        [rowData]="detaiList" [gridOptions]="gridOptions" [columnDefs]="columnDefs"
+        [frameworkComponents]="frameworkComponents" [paginationPageSize]="paginationPageSize" [animateRows]="true"
+        [pagination]="true" (gridReady)="onGridReady($event, value)">
+      </ag-grid-angular>
+    </div>
+  </div>
+  </div>
+</div>

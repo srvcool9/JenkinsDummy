@@ -1,0 +1,76 @@
+<div class="modal-dialog modal-boxAdduser modal-primary" role="document">
+    <form class="form" [formGroup]="addGroupForm">
+    <div class="modal-content">
+        <div class="modal-header"  style="background-color: #234280;">
+                <h3 class="modal-title mx-5 mt-3 mb-3" style="color: white;font-weight: bold;">{{groupTitle}}</h3>
+            </div>
+        <div class="modal-body">
+           
+                <div class="row mb-2 mt-5">
+                    <input type="text" hidden  formControlName="groupId"/>
+                    <div class="col-md-3 form-group mt-2 mx-5">
+                        <label class="mb-2 font-increase">Group Name <i class="asterik">*</i></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Enter Group Name"
+                        formControlName="groupName"
+                          />
+                          <small class="form-text text-muted font-validate" *ngIf="
+                          !groupName.valid && (groupName.dirty || groupName.touched)
+                        ">
+                          <span *ngIf="groupName.errors['required']">{{'addGroup.required'|translate}}</span>
+                          <span *ngIf="groupName.errors['pattern']">{{'addGroup.alpha'|translate}}</span>
+                          <span *ngIf="groupName.errors['minlength']">{{'addGroup.min'|translate}}</span>
+                          <span *ngIf="groupName.errors['maxlength']">{{'addGroup.max'|translate}}</span>
+                        </small>
+                      </div>
+                </div>
+                <div class="row mb-2 mt-5">
+                    <input type="text" hidden />
+                    <div class="col-md-3 form-group mt-2 mx-5">
+                        <label class="mb-2 font-increase">Description </label>
+                    </div>
+                    <div class="col-md-6">
+                        <textarea rows="2" class="form-control font-increase" 
+                        placeholder="Enter Group Description" style="height: 370px;"
+                        formControlName="description"
+                 ></textarea>
+                 <small class="form-text text-muted font-validate" *ngIf="
+                 !description.valid &&
+                 (description.dirty || description.touched)
+               ">
+                 <span *ngIf="description.errors['maxlength']">
+                   Maximum 250 characters allowed
+                 </span>
+               </small>
+                      </div>
+                </div>
+                <div class="row mb-2 mt-5">
+                    <input type="text" hidden />
+                    <div class="col-md-3 form-group mt-2 mx-5">
+                        <label class="mb-2 font-increase">Status</label>
+                    </div>
+                    <div class="form-check form-switch mt-2 mx-3 col-md-5">
+                        <input class="form-check-input status" type="checkbox" role="switch" formControlName="isActive" />
+                      </div>
+                </div>
+           
+        </div>
+
+        <div class="modal-footer">
+            <div class="row-buttons mt-4 mb-5">
+                <button type="button" class="btn btn-primary mx-3" (click)="save()"
+                style="font-size: 17px;" [disabled]="addGroupForm.invalid"
+                    >
+                   Save
+                </button>
+                <button type="button" class="btn btn-danger" (click)="closeModel()"
+                style="font-size: 17px;">
+                 Cancel
+                </button>
+            </div>
+        </div>
+    
+    </div>
+</form>
+</div>

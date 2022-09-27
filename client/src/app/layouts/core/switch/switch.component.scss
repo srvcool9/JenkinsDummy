@@ -1,0 +1,24 @@
+.form-switch{
+    padding-left: 2.5rem !important;
+    padding-top: 0.5rem !important;
+}
+
+.form-check-input{
+    // width:50% !important;
+    // height: 20% !important;
+    height: 1rem;
+    width: calc(1rem + 1rem);
+    // background-color: rgb(32,168,216) !important;
+    background-color: white;
+    cursor: pointer;
+}
+
+  .form-check-input.ng-valid:checked {
+    background-color: #1f5a16;
+    border-color: #1f5a16;
+  }
+
+  .form-check-input:checked {       
+    background-color: #1f5a16;
+    border-color: #1f5a16;
+  }

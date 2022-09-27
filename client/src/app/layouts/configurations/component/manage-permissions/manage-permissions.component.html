@@ -1,0 +1,125 @@
+<div class="mx-2">
+  <div class="row permission-card-row">
+    <div class="col-md-3">
+      <div class="left-permission-card">
+        <div class="card-header card-headerBg">
+          <strong style="font-size: 18px;width: 200px;">Available Modules</strong>
+        </div>
+      </div>
+      <div *ngFor="let items of moduleList; let i = index">
+        <button class="accordion" id="{{ i }}" [class.active]="i == activeIndex" (click)="toggleAccordian($event, i)">
+          {{ items.name }}
+        </button>
+
+        <div #panel class="panel" [style.max-height]="activeIndex != i ? 0 : panel.scrollHeight + 'px'">
+          <p *ngFor="let modules of items.children; let j = index">
+            <span *ngIf="modules.itemName==='Large Scale Assessment' || modules.itemName==='Training'; else template"> 
+              <label style="color: #20a8d8">{{ modules.name }}</label>
+            
+            <a #panel class="panel" [style.max-height]="
+                activeIndexSub != j ? 0 : panel.scrollHeight + 'px'
+              ">
+              <a *ngFor="let i of modules.children; let k = index">
+                <a href="javascript:void(0)" style="font-size: 15px" id="{{ k }}" 
+                (click)="toggleAccordianInsideSubMenu($event,k,i.id)">
+                  <br />
+                  {{ i.name }}
+                </a>
+              </a>
+            </a>            
+          </span>
+          <ng-template #template>
+          <a href="javascript:void(0)" id="{{ j }}" (click)="toggleAccordianSubMenu($event, j, modules.id)"
+            style="font-size: 15px">
+            {{ modules.name }}
+          </a>
+          <a #panel class="panel" [style.max-height]="
+              activeIndexSub != j ? 0 : panel.scrollHeight + 'px'
+            ">
+            <a *ngFor="let i of modules.children; let k = index">
+              <a href="javascript:void(0)" style="font-size: 15px" id="{{ k }}" 
+              (click)="toggleAccordianInsideSubMenu($event,k,i.id)">
+                <br />
+                {{ i.name }}
+              </a>
+            </a>
+          </a>            
+        </ng-template>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <ng-template [ngIf]="!getHide">
+      <div class="col-md-9 right-permission-card">
+        <p class="no_role-selected-txt" style="color: #ff0000cf">
+          <strong>No Modules has been selected yet!!</strong>
+        </p>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="isShow">
+      <div class="col-md-9 right-permission-card">
+        <div class="card-header">
+          <strong>{{ displayBreadCrumbText }}</strong>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <form [formGroup]="form">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th id="role">Role</th>
+                    <th align="center" id="read"> {{'permission.read'|translate}}</th>
+                    <th align="center" id="add"> {{'permission.add'|translate}}</th>
+                    <th align="center" id="edit"> {{'permission.edit'|translate}}</th>
+                    <th align="center" id="delete"> {{'permission.delete'|translate}}</th>
+                  </tr>
+                </thead>
+                <tbody formArrayName="permissionForm">
+                  <tr *ngFor="let list of permissionForm.value; let k = index" [formGroupName]="k">
+                    <td>
+                      {{ list.roleName }}
+                    </td>
+                    <td>
+                      <div class="form-check pl-4">
+                        <input class="form-check-input" type="checkbox" formControlName="view"
+                         />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check pl-4">
+                        <input class="form-check-input" type="checkbox" formControlName="add" 
+                       />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check pl-4">
+                        <input class="form-check-input" type="checkbox" formControlName="edit"
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check pl-4">
+                        <input class="form-check-input" type="checkbox" formControlName="delete"
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <td colspan="5">
+                    <div class="row-buttons">
+                      <button type="button" class="btn btn-primary mx-3" [disabled]="!enableEdit"
+                        (click)="onSubmit()">
+                     {{'permission.savePermission'|translate}}
+                      </button>
+                    </div>
+                  </td>
+                </tbody>
+              </table>
+            </form>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

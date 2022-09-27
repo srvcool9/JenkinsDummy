@@ -1,0 +1,29 @@
+<div class="modal-dialog modal-boxAdduser modal-primary" role="document">
+  <form class="form">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #234280">
+        <i class="fa fa-times" aria-label="Close" (click)="closeModel()"></i>
+      </div>
+      <div class="modal-body">
+        <label class="text mb-4">Are you sure you want to launch this batch?</label>
+        <div style="display: flex;">
+          <div> <i class="fa fa-exclamation-circle mx-1" style="color: gold;" aria-hidden="true"></i></div>
+          <div> <label style="font-size: 17px; color:red;" class="mx-3">Note : Once launched the system will not
+              allow any updates in Batch Information</label></div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="row-buttons mt-3 mb-3">
+          <button type="button" class="btn btn-primary mx-3" (click)="onYesClick()">
+            Yes
+          </button>
+          <button type="button" class="btn btn-danger" (click)="closeModel()">
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

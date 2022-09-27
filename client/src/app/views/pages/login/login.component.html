@@ -1,0 +1,71 @@
+<div class="bg-image">
+<div class="container  mt-5" id="container-height">
+
+  <div class="wrapper" style="background-color: #EDF4F9;">
+    <div id="center" class="pt-3"> 
+      <div class="mx-2">
+        <img [src]="rskLogo" id="logo"/>
+    </div>
+    <div class="title title-loginPage mx-3 mt-2" >
+      <span>Rajya Shiksha Kendra</span></div>
+  </div>
+    <div class="title login-title" style="color: black !important;"><span>Login</span></div>    
+    <form  [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <i class="fa fa-user"></i>
+        <input type="text" placeholder="Username" formControlName="username">
+      <div class="form-text text-danger mb-1" *ngIf="!username.valid && (username.dirty || username.touched)">
+      <small *ngIf="username.errors['required']">
+        Username is a required field
+      </small>
+      <small *ngIf="username.errors['maxlength']">
+       Maximum character length should be 50
+      </small>
+      <small *ngIf="username.errors['pattern']">
+       Username should be alphanumeric
+       </small>
+    </div>
+      </div>
+      <div class="row">
+        <i class="fa fa-lock"></i>
+        <input type="password" placeholder="Password" formControlName="password">
+       <div class="form-text text-danger mb-1" *ngIf="!password.valid && (password.dirty || password.touched)">
+         <small *ngIf="password.errors['required']">
+           Password is a required field
+         </small>
+         <!-- <small *ngIf="password.errors['minlength']">
+          Password too short
+        </small>   -->
+        <!-- <small *ngIf="password.errors['maxlength']">
+          Password must be between 4 to 20 characters
+        </small>   -->
+        <small *ngIf="password.errors['pattern']" style="margin-bottom: 5px">
+          Password must be 4-20, alphanumeric, special characters
+        </small>       
+       </div>
+      </div>
+
+      <div class="row">
+        <i class="fa fa-arrows-rotate"></i>
+        <input type="text" placeholder="Captcha" id="textBox" name="text">
+        <small id="output"></small>
+      </div>
+
+      <div class="text-center">
+       <strong class="captcha-text">{{randomString}}</strong>
+       <i class="fa fa-rotate-right" id="captcha-icon" (click)="refreshCaptcha()"></i>
+      </div>
+
+  
+
+      <div class="row button" style="margin-top: 5%;">
+        <input type="submit" value="Login" [disabled]="!form.valid" >
+      </div>
+      <div class="forgot-pwd-link"><a (click)="onForgotPwdClick()"
+        style="cursor: pointer;"
+        ><u>Forgot password?</u></a></div>
+    </form>
+  </div>
+</div>
+
+</div>

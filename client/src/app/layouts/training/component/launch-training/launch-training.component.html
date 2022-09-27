@@ -1,0 +1,71 @@
+<div class="animated fadeIn">
+    <div class="responsive-display justify-content-between mt-3 mx-2">
+        <div class="col-sm-3 grid-header">
+            <h4 style="font-weight: bold;" class="headingColor">Launch Training</h4>
+        </div>
+    </div>
+    <form [formGroup]="launchTrainingForm">
+        <div class="row mt-3 mb-3 mx-5">
+
+            
+            <div class="col-md-2">
+                <label>Training</label>
+                <ng-select placeholder="Select Training" [clearable]="false" [searchable]="false"
+                    [dropdownPosition]="'bottom'" [items]="initiateTrainingList" bindLabel="trainingName" bindValue=""
+                    formControlName="training" name="ok" (change)="selectedTraining($event)">
+                </ng-select>
+            </div>
+            <div class="col-md-2">
+                <label>Group</label>
+                <input type="text" placeholder="Group" 
+                    [value] = "groupName"
+                    formControlName="group"
+                    class="form-control"
+                    readonly>              
+            </div>
+            <div class="col-md-2">
+                <label>Sub-Group</label>
+                <input placeholder="Sub-Group" type="text"
+                    [value] = "subGroupName"
+                    formControlName="subGroup"
+                    class="form-control"
+                    readonly>       
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary-blue w-75 mx-3 mt-4" (click)="viewBatches()">View Batches</button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary-blue w-75 mx-3 mt-4" (click)="viewDetails()">View Details</button>
+            </div>
+        </div>
+    </form>
+    <div class="grid-card-body mt-3 mx-5">
+        <ag-grid-angular style="width: 100%; height: 60vh;" (firstDataRendered)="onFirstDataRendered($event)"
+            class="ag-theme-alpine" [animateRows]="true" [rowData]="launchTrainingData" [gridOptions]="gridOptions"
+            [columnDefs]="columnDefs" [frameworkComponents]="frameworkComponents"
+            [paginationPageSize]="paginationPageSize" [animateRows]="true" [pagination]="true"
+            (gridReady)="onGridReady($event,value)">
+        </ag-grid-angular>
+        <div class="py-2 pl-4 border-top">
+            <p class="mb-0">
+                {{'total_records'|translate}} <strong> {{recordCount}}</strong>
+                <span class="pull-right">
+                    <strong> {{'select_record_count'|translate}} </strong>
+                    <span>
+                        <select #t (change)="callType(t.value)">
+                            <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                        </select>
+                    </span>
+                </span>
+            </p>
+        </div>
+        <div bsModal #primaryModal="bs-modal" class="modal modal-boxAdduser fade" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y: hidden !important;"
+            [config]="{backdrop :'static'}" mouse="false">
+
+            <app-launch-pop-up [id]="id" [allGroupFromParent]="allGroupFromParent" (status)="onStatusChanged($event)"
+                (changeIndicator)="changeIndicator($event)" (dataLoaded)="dataLoaded($event)">
+            </app-launch-pop-up>
+        </div>
+    </div>
+</div>

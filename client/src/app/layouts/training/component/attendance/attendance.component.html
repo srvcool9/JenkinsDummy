@@ -1,0 +1,81 @@
+<div class="animated fadeIn" style="overflow-x: hidden;">
+    <div class="responsive-display justify-content-between mt-3 mx-2">
+        <div class="col-sm-3 mx-1 grid-header">
+            <h4 style="font-weight: bold;" class="headingColor">Attendance</h4>
+        </div>
+    </div>
+    <form [formGroup]="attendanceForm">
+        <div class="mx-3 mt-2 row">
+
+            <div class="col-md-3">
+                <!-- Launched batch code will be visible here -->
+                <label>Batch Code</label>
+                <ng-select placeholder="Select Batch Code" [clearable]="false" [searchable]="false"
+                    [dropdownPosition]="'bottom'" [items]="batchCode" bindLabel="batchId" bindValue="batchId"
+                    formControlName="batchCode" name="ok" (change)="selectedBatchCode($event)" [readonly]="readOnly">
+                </ng-select>
+            </div>
+            <div class="col-md-3">
+                <label>Session</label>
+                <ng-select placeholder="Select Session" [clearable]="false" [searchable]="false"
+                    [dropdownPosition]="'bottom'" [items]="session" bindLabel="name" bindValue="name"
+                    formControlName="session" name="ok" (change)="selectedSession($event)" [readonly]="readOnly">
+                </ng-select>
+            </div>
+            <div class="col-md-3">
+                <label>Date</label>
+                <input type="date" placeholder="Date" class="form-control" formControlName="date" readonly />
+            </div>
+            <div class="col-md-3">
+                <label>Mark For</label>
+                <ng-select placeholder="Select Mark For" [clearable]="false" [searchable]="false"
+                    [dropdownPosition]="'bottom'" [items]="markFor" bindLabel="name" bindValue="id"
+                    formControlName="markFor" name="ok" (change)="selectedMarkFor($event)" [readonly]="readOnly">
+                </ng-select>
+            </div>
+            <div class="mt-3">
+                <button class="col-md-2 col-sm-3 btn btn-primary-blue pull-right" [disabled]="isViewDisabled" 
+                (click)="viewDetail()">
+    View Detail
+                </button>
+            </div>
+        </div>
+    </form>
+    
+    <div class="mt-2 mx-5">
+        <ag-grid-angular style="width: 100%; height: 55vh;" (firstDataRendered)="onFirstDataRendered($event)"
+            class="ag-theme-alpine" [animateRows]="true" [rowData]="attendanceData" [gridOptions]="gridOptions"
+            [columnDefs]="columnDefs" [frameworkComponents]="frameworkComponents"
+            [paginationPageSize]="paginationPageSize" [animateRows]="true" [pagination]="true"
+            (gridReady)="onGridReady($event,value)">
+        </ag-grid-angular>
+
+        <div style="display: grid;">
+            <div>
+                <button class="btn btn-primary pull-right mt-2 mb-3" (click)="submit()">Submit</button>
+            </div>
+            <div class="py-2 pl-4 border-top">
+                <p class="mb-0">
+                    {{'total_records'|translate}} <strong> {{recordCount}}</strong>
+                    <span class="pull-right">
+                        <strong> {{'select_record_count'|translate}} </strong>
+                        <span>
+                            <select #t (change)="callType(t.value)">
+                                <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                            </select>
+                        </span>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div bsModal #primaryModal="bs-modal" class="modal modal-boxAdduser fade" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y: hidden !important;"
+            [config]="{backdrop :'static'}" mouse="false">
+
+            <app-remark-pop-up [id]="id" [allGroupFromParent]="allGroupFromParent" (formInputText)="onAddBtnClicked($event)"
+            (getId)="getId($event)"
+                (changeIndicator)="changeIndicator($event)" (dataLoaded)="dataLoaded($event)">
+            </app-remark-pop-up>
+        </div>
+    </div>
+</div>

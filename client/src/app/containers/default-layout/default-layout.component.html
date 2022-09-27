@@ -1,0 +1,212 @@
+<!--sidebar-->
+<div style="zoom: 85%">
+  <c-sidebar #sidebar="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar" visible>
+
+    <c-sidebar-brand>
+      <img src="../default-layout/../../../assets/images/rsk.png" height="40" />
+      <strong style="
+          font-size: 17px;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+            Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+            sans-serif;
+        ">
+        {{ "rsk" | translate }}
+      </strong>
+    </c-sidebar-brand>
+
+    <perfect-scrollbar [config]="perfectScrollbarConfig">
+
+      <c-sidebar-nav [navItems]="navItems"> </c-sidebar-nav>
+    </perfect-scrollbar>
+
+  </c-sidebar>
+  <div class="wrapper d-flex flex-column min-vh-100" style="background-color: #005391">
+
+    <ng-container>
+      <c-container [fluid]="true" style="display: flex;">
+        <button toggle="visible" style="color: white;" cHeaderToggler [cSidebarToggle]="sidebarId" class="ps-1">
+          <svg cIcon name="cilMenu" size="lg"></svg>
+        </button>
+        <c-header-nav class="d-none d-lg-flex me-auto">
+          <c-nav-item>
+            <a cNavLink routerLink="/dashboard" routerLinkActive="active" style="color: white; font-weight: 500;">
+              {{'dashboard' | translate}}
+            </a>
+          </c-nav-item>
+
+        </c-header-nav>
+
+
+        <c-header-nav class="d-none d-lg-flex">
+          <c-nav-item>
+            <div class="dropdown">
+              <div class="dropbtn" style="color: white; font-weight:500">
+                <i class="fa fa-globe" aria-hidden="true"></i>
+                {{ "language.english" | translate }}
+              </div>
+              <div class="dropdown-content" (click)="selectLanguage($event)">
+                <option value="en">{{'language.english' | translate}}</option>
+                <option value="hi">{{'language.hindi' | translate}}</option>
+              </div>
+            </div>
+          </c-nav-item>
+        </c-header-nav>
+        <c-header-nav class="ms-3">
+          <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
+        </c-header-nav>
+      </c-container>
+      <div class="d-flex justify-content-between mb-2" >
+        <div style="margin-left: 18px;">
+        <c-breadcrumb-router class="ms-2 mb-2"></c-breadcrumb-router>
+         </div>
+      <div style="background-color: #005391; color : white" class="mt-2  mx-5">
+          <div class="d-flex" style="font-weight:500;"> 
+         <div class="mx-3 mt-1">Logged in Role :</div> 
+         <div style="margin-right: -30px;">
+         <ng-select
+            placeholder="Select"
+            [clearable]="false"
+            [searchable]="false"
+            [dropdownPosition]="'bottom'"
+            [items]="roleList"
+            [(ngModel)]="selectedAttributes"
+            name="ok"
+            bindLabel="roleName"
+            bindValue="roleId"
+            (change)="onSelectedRole($event)"
+            style="width: 150px;"
+          >
+          </ng-select>
+        </div>
+        </div>
+      </div>
+
+    </div>
+    </ng-container>
+
+
+    <ng-template #userDropdown>
+      <c-dropdown alignment="end" variant="nav-item">
+        <button cButton color="" [caret]="false" cDropdownToggle class="py-0">
+          <c-avatar
+            cTextColor="primary"
+            shape="rounded-1"
+            size="md"
+            src="./assets/img/avatars/8.jpg"
+            status="success"
+          >
+          </c-avatar>
+        </button>
+        <ul cDropdownMenu class="pt-0 pr-5 w-auto">
+          <li>
+            <h6 cDropdownHeader class="bg-light fw-semibold py-2">Account</h6>
+          </li>
+          <li>
+            <a routerLink="./" cDropdownItem>
+              <svg cIcon class="me-2" name="cilBell"></svg>
+              Updates
+              <c-badge class="ms-2 float-end" color="info"> 42 </c-badge>
+            </a>
+          </li>
+          <li>
+            <a routerLink="./" cDropdownItem>
+              <svg cIcon class="me-2" name="cilEnvelopeOpen"></svg>
+              Messages
+              <c-badge class="ms-2 float-end" color="success"> 42 </c-badge>
+            </a>
+          </li>
+          <li>
+            <a routerLink="./" cDropdownItem>
+              <svg cIcon class="me-2" name="cilTask"></svg>
+              Tasks
+              <c-badge class="ms-2 float-end" color="danger"> 42 </c-badge>
+            </a>
+          </li>
+          <li>
+            <a routerLink="./" cDropdownItem>
+              <svg cIcon class="me-2" name="cilCommentSquare"></svg>
+              Comments
+              <c-badge class="ms-auto" color="warning"> 42 </c-badge>
+            </a>
+          </li>
+          <li>
+            <h6 cDropdownHeader class="bg-light fw-semibold py-2">Settings</h6>
+          </li>
+          <li></li>
+          <li>
+            <a routerLink="./" cDropdownItem>
+              <svg cIcon class="me-2" name="cilUser"></svg>
+              Profile
+            </a>
+          </li>
+          <li>
+            <a routerLink="./" cDropdownItem>
+              <svg cIcon class="me-2" name="cilSettings"></svg>
+              Settings
+            </a>
+          </li>
+          <li>
+            <a routerLink="./" cDropdownItem>
+              <svg cIcon class="me-2" name="cilCreditCard"></svg>
+              Payments
+              <c-badge class="ms-2 float-end" color="secondary"> 42 </c-badge>
+            </a>
+          </li>
+          <li>
+            <a routerLink="./" cDropdownItem>
+              <svg cIcon class="me-2" name="cilFile"></svg>
+              Projects
+              <c-badge class="ms-2 float-end" color="primary"> 42 </c-badge>
+            </a>
+          </li>
+          <li>
+            <hr cDropdownDivider />
+          </li>
+          <li>
+            <button (click)="logout()" cDropdownItem>
+              <svg cIcon class="me-2" name="cilLockLocked"></svg>
+              Logout
+            </button>
+          </li>
+          <li></li>
+        </ul>
+      </c-dropdown>
+    </ng-template>
+    
+
+
+    <!-- <app-default-header
+      style="
+        padding: 0% !important;
+        background-color: #005391;
+      "
+      class="d-print-none header header-sticky"
+      position="sticky"
+      sidebarId="sidebar"
+    ></app-default-header> -->
+
+
+    <!-- <div style="background-color: #005391; color : white">
+        <div class="dropdown" style="margin-left:87%">
+          <div class="dropbtn" style="font-weight:500; margin-top: -5px;"> 
+          Logged in Role
+        </div>
+          <div *ngFor="let role of roleList" class="dropdown-content" (click)="selectedRole($event)">
+            <option>{{role.roleName}}</option> 
+          </div>
+        </div>
+      </div> -->
+
+
+
+    <div class="body flex-grow-1 bg-color">
+
+      <router-outlet></router-outlet>
+
+    </div>
+
+  </div>
+
+
+
+</div>

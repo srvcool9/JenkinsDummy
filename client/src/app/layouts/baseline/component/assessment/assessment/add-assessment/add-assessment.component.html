@@ -1,0 +1,258 @@
+<div class="bg-color">
+    <div class="row m-2 mt-2 card">
+        <div class="col-sm-5 mt-2">
+            <h4 style="color: #234280;font-weight: bold;">{{assmtTitle}}</h4>
+        </div>
+        <div class="">
+            <form [formGroup]="addAssessmentForm" class="mx-3">
+                <div class="row mt-1">
+                    <input type="text" class="form-control" formControlName="id" hidden="dis" />
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2">{{'addAssmt.name'|translate}} <i class="asterik">*</i></label>
+                        <input type="text" class="form-control" formControlName="name" placeholder="Enter Name" />
+                        <small class="form-text text-muted" *ngIf="
+            !assessmentName.valid &&
+            (assessmentName.dirty || assessmentName.touched)
+          ">
+                            <span *ngIf="assessmentName.errors['required']">
+                                {{'addAssmt.assmtNameReq'|translate}}
+                            </span>
+                            <span *ngIf="assessmentName.errors['pattern']">
+                                {{'addAssmt.alpha'|translate}}
+                            </span>
+                            <span *ngIf="assessmentName.errors['maxlength']">
+                                {{'addAssmt.max'|translate}}
+                            </span>
+                        </small>
+                    </div>
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2">{{'addAssmt.descrip'|translate}}</label>
+                        <input type="text" class="form-control" formControlName="description"
+                            placeholder="Enter Description" />
+                        <small class="form-text text-muted" *ngIf="
+            !assessmentDescription.valid &&
+            (assessmentDescription.dirty || assessmentDescription.touched)
+          ">
+                            <span *ngIf="assessmentDescription.errors['maxlength']">
+                                {{'addAssmt.only'|translate}}
+                            </span>
+                        </small>
+                    </div>
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2">{{'addAssmt.group'|translate}}</label>
+                        <ng-select placeholder="Select Group" [clearable]="false" [searchable]="false"
+                            [dropdownPosition]="'bottom'" [items]="groups" bindLabel="groupName" bindValue="groupId"
+                            name="ok" formControlName="group">
+                        </ng-select>
+                    </div>
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2">{{'addAssmt.criteria'|translate}} <i class="asterik">*</i></label>
+                        <ng-select placeholder="Select Criteria" [clearable]="false" [searchable]="false"
+                            [dropdownPosition]="'bottom'" [items]="criterias" bindLabel="name" bindValue="id" name="ok"
+                            formControlName="criteria">
+                        </ng-select>
+                        <small class="form-text text-muted"
+                            *ngIf="!criteria.valid && (criteria.dirty || criteria.touched)">
+                            <span *ngIf="criteria.errors['required']">
+                                {{'addAssmt.criteriaReq'|translate}}
+                            </span>
+                        </small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2 mt-4">{{'addAssmt.type'|translate}} <i class="asterik">*</i></label>
+                        <ng-select placeholder="Select Type" [clearable]="false" [searchable]="false"
+                            [dropdownPosition]="'bottom'" [items]="types" bindLabel="name" bindValue="id" name="ok"
+                            formControlName="type">
+                        </ng-select>
+                        <small class="form-text text-muted" *ngIf="!type.valid && (type.dirty || type.touched)">
+                            <span *ngIf="type.errors['required']">
+                                {{'addAssmt.typeReq'|translate}}
+                            </span>
+                        </small>
+                    </div>
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2 mt-4">{{'addAssmt.mode'|translate}} <i class="asterik">*</i></label>
+                        <ng-select placeholder="Select Mode" [clearable]="false" [searchable]="false"
+                            [dropdownPosition]="'bottom'" [items]="mode" bindLabel="name" bindValue="id" name="ok"
+                            formControlName="mode">
+                        </ng-select>
+                        <small class="form-text text-muted" *ngIf="!modes.valid && (modes.dirty || modes.touched)">
+                            <span *ngIf="modes.errors['required']">
+                                {{'addAssmt.modeReq'|translate}}
+                            </span>
+                        </small>
+                    </div>
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2 mt-4">{{'addAssmt.enum'|translate}}</label>
+                        <ng-select placeholder="Select Field Investigator" [clearable]="false" [searchable]="false"
+                            [dropdownPosition]="'bottom'" [items]="enumerator" bindLabel="name" bindValue="id" name="ok"
+                            formControlName="enumerator">
+                        </ng-select>
+                    </div>
+
+                    <div class="col-3 mb-2">
+                        <label class="mb-2 mt-4"> {{'addAssmt.status'|translate}}</label>
+                        <div class="form-check form-switch mx-3">
+                            <input class="form-check-input status" type="checkbox" formControlName="status"
+                                role="switch" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2 mt-4">
+                            <input type="checkbox" class="form-check-input" [(ngModel)]="startDateCheck"
+                                [ngModelOptions]="{standalone: true}" (change)="checkBoxStart($event)" />
+                            {{'addAssmt.startDate'|translate}}</label>
+                        <input type="date" class="form-control" formControlName="startDate"
+                            [attr.disabled]="disabledStart"
+                            (change)="getStartDate($event)" />
+                    </div>
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2 mt-4">
+                            <input type="checkbox" class="form-check-input" [(ngModel)]="endDateCheck"
+                                [ngModelOptions]="{standalone: true}" (change)="checkBoxEnd($event)" />
+                            {{'addAssmt.endDate'|translate}}</label>
+                        <input type="date" class="form-control" formControlName="endDate" [attr.disabled]="disabledEnd"
+                            (change)="getEndDate($event)" />
+                        <small id="error"></small>
+                    </div>
+                    <div class="col-3 responsive-registration" *ngIf="show">
+                        <label class="mb-2 mt-4">{{'addAssmt.total'|translate}}</label>
+                        <input type="text" class="form-control" formControlName="totalNumberOfDay" readonly
+                            placeholder="Enter Total No. of Days" />
+                    </div>
+                    <!-- </div>
+
+        <div class="row responsive-registration"> -->
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2 mt-4"> {{'addAssmt.class'|translate}} <i class="asterik">*</i></label>
+                        <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="class" formControlName="class">
+                        </ng-multiselect-dropdown>
+                        <small class="form-text text-muted" *ngIf="!classesReq.valid && (classesReq.dirty || classesReq.touched)">
+                            <span *ngIf="classesReq.errors['required']">
+                                {{'addAssmt.classReq'|translate}}
+                            </span>
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-5 mt-4 mb-2 responsive-registration">
+                    <strong class="text-color-blue">{{'addAssmt.schholSelection'|translate}}</strong>
+                </div>
+                <div class="row">
+                    <div class="col-3 mt-4  mb-2 responsive-registration">
+                        <label class="mb-2"> {{'addAssmt.level'|translate}}</label>
+                        <ng-select placeholder="Select level" [clearable]="false" [searchable]="false"
+                            [dropdownPosition]="'bottom'" [items]="level" bindLabel="name" bindValue="id"
+                            formControlName="level" name="ok">
+                        </ng-select>
+                    </div>
+                    <div class="col-3 mt-4 mb-2 responsive-registration">
+                        <label class="mb-2">
+                            <input type="checkbox" class="form-check-input" (change)="schoolTypeCheckbox($event)"
+                                formControlName="schoolTypeCheck" />
+                            {{'addAssmt.schoolType'|translate}}</label>
+                        <ng-select placeholder="Select school type" [clearable]="false" [searchable]="false"
+                            [dropdownPosition]="'bottom'" [items]="schoolType" bindLabel="name" bindValue="id"
+                            formControlName="schoolType" name="ok">
+                        </ng-select>
+                    </div>
+                    
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2 mt-4">{{'addAssmt.num'|translate}} <i class="asterik">*</i></label>
+                        <input type="number" class="form-control" formControlName="numberOfSchool"
+                            placeholder="Enter Number of School" />
+                        <small class="form-text text-muted" *ngIf="
+            !numberOfSchool.valid &&
+            (numberOfSchool.dirty || numberOfSchool.touched)
+          ">
+                            <span *ngIf="numberOfSchool.errors['required']">
+                                {{'addAssmt.numOfSchool'|translate}}
+                            </span>
+                            <span *ngIf="numberOfSchool.errors['pattern']">
+                                {{'addAssmt.numAllwd'|translate}}
+                            </span>
+                        </small>
+                    </div>
+                    <div class="col-3 mt-4 mb-2 responsive-registration">
+                        <label class="mb-2"> {{'addAssmt.minStudPerClass'|translate}} <i class="asterik">*</i></label>
+
+                        <input type="number" class="form-control" formControlName="minStudentsPerClass"
+                            placeholder="Enter Min students per class" />
+                            <small class="form-text text-muted" *ngIf="
+            !minStudentsPerClass.valid &&
+            (minStudentsPerClass.dirty || minStudentsPerClass.touched)
+          ">
+                            <span *ngIf="minStudentsPerClass.errors['required']">
+                                {{'addAssmt.minStude'|translate}}
+                            </span>
+                            <span *ngIf="minStudentsPerClass.errors['pattern']">
+                                {{'addAssmt.numAllwd'|translate}}
+                            </span>
+                        </small>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-3 responsive-registration">
+                        <label class="mb-2">
+                            <input type="checkbox" class="form-check-input" formControlName="schoolLoaction"
+                                (change)="onSchoolLocationCheck($event)" />
+
+                            {{'addAssmt.schoolocation'|translate}}</label>
+                        <div class="col mx-4">
+                            <div class="column">
+                                <input type="checkbox" class="form-check-input" [attr.disabled]="disabledLocation"
+                                    [(ngModel)]="checkRural" [ngModelOptions]="{standalone: true}"
+                                    (click)="onRuralClick($event)" />
+                                <label class="mx-2"> {{'addAssmt.rural'|translate}}</label>
+                                <input type="text" class="mx-1 inputField" style="text-decoration: underline"
+                                    (focus)="onRuralFocus()" [attr.disabled]="disableRuralPercent"
+                                    formControlName="rural" />
+                                <input type="text" value="%" class="inputField" [hidden]="hideRuralPercent" />
+                            </div>
+                            <div>
+                                <input type="checkbox" class="form-check-input" [attr.disabled]="disabledLocation"
+                                    [(ngModel)]="checkUrban" [ngModelOptions]="{standalone: true}"
+                                    (click)="onUrbanClick($event)" />
+                                <label class="mx-2"> {{'addAssmt.urban'|translate}}</label>
+                                <input type="text" class="inputField" style="text-decoration: underline"
+                                    (focus)="onUrbanFocus()" [attr.disabled]="disableUrbanPercent"
+                                    formControlName="urban" />
+                                <input type="text" value="%" class="inputField" [hidden]="hideUrbanPercent" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3 responsive-registration" *ngIf="overallPercent">
+                        <label class="mb-2 mt-4"> {{'addAssmt.overall'|translate}}</label>
+                        <div>
+                            <input type="text" formControlName="overallPercent" readonly class="inpt1"
+                                [ngStyle]="{'color': colorvariable ? 'green' : 'red'}" />
+                            <input type="text" readonly value="/ 100" class="inpt" />
+                        </div>
+                        <div>
+                            <small class="form-text text-muted" *ngIf="!overallPercentage.valid">
+                                <span *ngIf="overallPercentage.errors['pattern']">
+                                    {{'addAssmt.note'|translate}}
+                                </span>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row-buttons mt-4 mb-2">
+                    <button type="button" class="btn btn-primary mx-3" (click)="save()"
+                        [disabled]="addAssessmentForm.invalid">
+                        {{'addAssmt.save'|translate}}
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="cancel()">
+                        {{'addAssmt.cancel'|translate}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

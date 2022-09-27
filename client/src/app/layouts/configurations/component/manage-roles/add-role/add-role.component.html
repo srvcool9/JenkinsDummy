@@ -1,0 +1,185 @@
+<div class="bg-color">
+  <div class="row m-2 mt-2 card">
+    <div class="col-sm-5 mt-2">
+      <h4 style="font-weight: bold;color: #005391;">{{ Role }}</h4>
+    </div>
+    <div class="form ">
+      <form [formGroup]="addRoleForm">
+        <input type="text" formControlName="roleId" hidden />
+          <div class="row m-2 ">
+            <div class="col-md-4 mb-2">
+              <!-- <div class="form-group"> -->
+                <label class="mb-2">{{'rolemgmt.rolename' | translate}} <i class="asterik">*</i></label>
+                <input type="text" class="form-control" placeholder="Enter Role Name"
+                  formControlName="roleName" [readonly]="roleNameDisabled" />
+                <small class="form-text text-muted" *ngIf="!roleName.valid && (roleName.dirty ||roleName.touched) ">
+                  <span *ngIf="roleName.errors['required']">
+                    {{'rolemgmt.enter' | translate}}
+                  </span>
+                  <span *ngIf="roleName.errors['pattern']">
+                    {{'rolemgmt.alpha' | translate}}
+                  </span>
+                  <span *ngIf="roleName.errors['minlength']">
+                    {{'rolemgmt.min' | translate}}
+                  </span>
+                  <span *ngIf="roleName.errors['maxlength']">
+                    {{'rolemgmt.max' | translate}}
+                  </span>
+                </small>
+              <!-- </div> -->
+            </div>
+            <div class="col-md-4">
+              <label class="mb-2 ">{{'rolemgmt.type'|translate}} <i class="asterik">*</i></label>
+              <ng-select placeholder="Select Type" [clearable]="false" [searchable]="false"
+                [dropdownPosition]="'bottom'" [items]="roleTypes" bindLabel="name" bindValue="id"
+                [(ngModel)]="selectedType" name="ok" formControlName="roleType">
+              </ng-select>
+              <small class="form-text text-muted" *ngIf="!roleType.valid && (roleType.dirty ||roleType.touched)">
+                <span *ngIf="roleType.errors['required']">
+                  {{'rolemgmt.roletype'|translate}}
+                </span>
+              </small>
+            </div>
+            
+            <div class="col-md-4">
+              <label class="mb-2">{{'rolemgmt.copy'|translate}}</label>
+              <ng-select placeholder="--Select--" [clearable]="false" [searchable]="false" [items]="existingRoles"
+                bindLabel="roleName" bindValue="roleId" (change)="onChange($event)" formControlName="existingRoles">
+              </ng-select>
+          </div>
+          </div>
+          <!-- </div> -->
+          <!-- <div class="row m-2"> -->
+            
+            <div class="row m-2">
+              <div class="col-md-8">
+                <label class="mb-2">{{'rolemgmt.descrip' | translate}}</label>
+                <textarea maxlength="250" rows="2" class="form-control" placeholder="Enter Role Description"
+                  formControlName="roleDescription"></textarea>
+                <small class="form-text text-muted"
+                  *ngIf="!roleDescription.valid && (roleDescription.dirty ||roleDescription.touched)">
+                  <span *ngIf="roleDescription.errors['maxlength']">
+                    Only {{roleDescription.errors['maxlength'].requiredLength}} characters allowed
+                  </span>
+                </small>
+            </div>
+              <div class="col-md-4 mb-3">
+                <label class="mb-2 mt-2">{{'rolemgmt.status'|translate}}</label>
+                <div class="form-check form-switch mx-3">
+                  <input class="form-check-input status" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked
+                    formControlName="isActive" />
+                </div>                  
+              </div>
+
+          </div>
+        <!-- </div> -->
+
+        <!-- <div class="card mt-3" style="background-color: #f5f5f5;">
+          <div class="row m-2">
+          </div>
+        </div> -->
+
+
+        <div class="mx-3 px-1" style="text-align: -webkit-center;">
+          <div class="col-md-12 scroll" style="display: block;">
+            <table class="table" formArrayName="permissionForm">
+              <thead>
+                <tr >
+                  <th style="font-weight: bold;">Permit</th>
+                  <th style="font-weight: bold;" align="center" id="read">Read</th>
+                  <th style="font-weight: bold;" align="center" id="add">Add</th>
+                  <th style="font-weight: bold;" align="center" id="edit">Edit</th>
+                  <th style="font-weight: bold;" align="center" id="delete">Delete</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let subModule of permissionForm.value; let i = index;" [formGroupName]="i">
+                <tr class="module" style="background-color: rgba(0,0,0,.03);" *ngIf="subModule.moduleGroupName !== ''">
+                  <td> 
+                    <input style="background-color: rgba(0,0,0,.0);" type="text" readonly formControlName="moduleGroupName"
+                     class="input-border-module" />
+                    <br/></td>
+                    <!-- <td>
+                      <input type="text" readonly formControlName="subModules"
+                      class="input-border-submodule mx-3 p-0" /></td> -->
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr class="sub-module">
+                  <td> 
+                    <!-- <input type="text" readonly formControlName="moduleGroupName"
+                     class="input-border-module mb-4" />
+                    <br/> -->
+                    <input type="text" readonly formControlName="subModules"
+                    class="input-border-submodule mt-2 mx-3 p-0" /></td>
+                  <td><input type="checkbox" formControlName="view" class="mx-2 mt-3 cursor" [(ngModel)]="theCheckbox[i]"
+                    [attr.disabled]="isDisabled[i] ? true : null" id="chk" class="increaseBox"/></td>
+                  <td><input type="checkbox" class="checkbox mx-2 mt-3 cursor" formControlName="add" id="chk1"
+                    (change)="isCheckedAdd(i)" class="increaseBox"/></td>
+                  <td><input type="checkbox" class="checkbox mx-2 mt-3 cursor" formControlName="edit"
+                    (change)="isCheckedAdd(i)" class="increaseBox"/></td>
+                  <td><input type="checkbox" class="checkbox mx-2 mt-3 cursor" formControlName="delete"
+                    (change)="isCheckedAdd(i)" class="increaseBox" /></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="row-buttons mx-2 ">
+            <button type="button" class="btn btn-primary mx-3" [disabled]="addRoleForm.invalid" (click)="save()">
+              {{'rolemgmt.save'|translate}}
+            </button>
+            <button type="button" class="btn btn-danger" (click)="cancel()">
+              {{'rolemgmt.cancel'|translate}}
+            </button>
+          </div>
+        </div>
+
+        <!-- <div class="card mt-3" style="background-color: #f5f5f5;">
+          <div class="mt-3 permit mb-3 m-3">
+            <span style="padding-right : 39%;" class="color-light-blue pb-2">{{'rolemgmt.permit'|translate}}</span>
+            <span style="padding-right : 13%;" class="color-light-blue">{{'rolemgmt.read'|translate}}</span>
+            <span style="padding-right : 13.3%;" class="color-light-blue">{{'rolemgmt.add'|translate}}</span>
+            <span style="padding-right : 13%;" class="color-light-blue">{{'rolemgmt.edit'|translate}}</span>
+            <span class="color-light-blue">{{'rolemgmt.delete'|translate}}</span>
+
+            <div class="row pt-2"> -->
+
+              <!-- <div formArrayName="permissionForm">
+                <div *ngFor="let subModule of permissionForm.value; let i = index;" [formGroupName]="i">
+                  <input type="text" style="background-color: #f5f5f5;" readonly formControlName="moduleGroupName"
+                    *ngIf="subModule.moduleGroupName !== ''" class="input-border-module mb-2 mt-2" />
+                  <br />
+
+                  <div class="col-md-12 d-flex">
+                    <label class="col-md-5 text-left">
+                      <input type="text" style="background-color: #f5f5f5;" readonly formControlName="subModules"
+                        class="input-border-submodule m-0 p-0" />
+                    </label>
+                    <div class="col-md-7 px-2 responsive-display" >
+                      <span style="padding-right: 26%">
+                        <input type="checkbox" formControlName="view" [(ngModel)]="theCheckbox[i]"
+                          [attr.disabled]="isDisabled[i] ? true : null" id="chk" /></span>
+                      <span style="padding-right: 26%">
+                        <input type="checkbox" class="checkbox" formControlName="add" id="chk1"
+                          (change)="isCheckedAdd(i)" /></span>
+                      <span style="padding-right: 24%">
+                        <input type="checkbox" class="checkbox" formControlName="edit"
+                          (change)="isCheckedAdd(i)" /></span>
+                      <span style="padding-right: 0%">
+                        <input type="checkbox" class="checkbox" formControlName="delete"
+                          (change)="isCheckedAdd(i)" /></span>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+            <!-- </div>
+          </div>
+        </div> -->
+
+      </form>
+    </div>
+  </div>
+</div>

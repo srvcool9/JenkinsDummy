@@ -1,0 +1,15 @@
+div.dt-top-container {
+    display: grid;
+    grid-template-rows:60px 100px 200px 60px;
+    grid-template-columns:repeat(3,1fr) 150px;
+    grid-gap:20px;
+  }
+  
+  div.dt-center-in-div {
+    // margin: 0 auto;
+    margin-left: 300px !important;
+  }
+  
+  div.dt-filter-spacer {
+    margin: 0px 0;
+  }

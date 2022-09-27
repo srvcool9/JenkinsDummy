@@ -1,0 +1,155 @@
+{
+    "chooseLanguage" : "Choose Language",
+    "language.english" : "English",
+    "language.hindi" : "Hindi",
+    "language.french": "French",
+    "language.german" : "German",
+    "dashboard" : "Dashboard",
+    "total_records":" Total Records: ",
+    "select_record_count":" Select Record Count ",
+    "export_to_excel" : "Export to Excel",
+    "rsk":"Rajya Shiksha Kendra",
+
+    "rolemgmt" : {
+        "rolemgmt": "Role Management",
+        "addRoleLbl": "Add Role",
+        "descrip" : "Description",
+        "status" : "Status",
+        "type"   : "Type",
+        "copy"   : "Copy Existing Roles",
+        "permit" : "Permit",
+        "read" : "Read",
+        "add"  : "Add",
+        "edit" : "Edit",
+        "delete" : "Delete",
+        "addrole" : "Add Role",
+        "rolename" : "Role Name",
+        "enter" : " Enter Role name",
+        "alpha" : "Role Name should be alphanumeric",
+        "min" : " Minimum 2 characters allowed",
+        "max" : "Only 50 characters allowed",
+        "roletype" : "Please select a Role Type",
+        "save" : "Save",
+        "cancel" : "Cancel"
+    },
+
+
+    "usermgmt":{
+        "usermgmt": "User Management",
+        "empCode": "Employee Unique ID",
+        "show"    : "Show",
+        "name"    : "Name",
+        "Farah"   : "Farah Farooque"
+    },
+
+    "associatedrole" : {
+        "empCode": "Employee Unique ID",
+        "name"    : "Name",
+        "role"  : "Role",
+        "type"   : "Type",
+        "status" : "Status",
+        "area" : "Area",
+        "state" : "State",
+        "division" : "Division",
+        "district" : "District",
+        "block"  : "Block",
+        "cluster"  : "Cluster",
+        "school" : "School",
+        "add" : "Add"
+    },
+
+
+    "group" : {
+        "groupTitle" : "Assessment Group",
+        "group": "Group",
+        
+        "assessment":"Assessment",
+        "addGrp" : "Add Group"
+    },
+
+    "addGroup":{
+        "grpName": "Group Name",
+        "required": "Group Name is Required",
+        "alpha":"Group Name should be alphanumeric",
+        "min":"Minimum 2 characters allowed",
+        "max":"Maximum 50 characters allowed",
+        "descrip":"Description",
+        "descripMax":"Only 200 characters allowed",
+        "status":"Status",
+        "cancel" : "Cancel"
+    },
+
+    "assmt" :{
+       "assmtListing" :  "Assessment Listing",
+       "grp" : "Group",
+       "assmt":"Assessment"
+    },
+
+    
+  "addAssmt" : {
+    "addAssmt" : "Add Assessment",
+    "name" : "Name",
+    "descrip": "Description",
+    "group":"Group",
+    "criteria":"Criteria",
+    "type":"Type",
+    "mode":"Mode",
+    "enum":"Enumerator/Field Investigator",
+    "num":"Number of School",
+    "startDate":"Start Date",
+    "endDate":"End Date",
+    "class":"Class",
+    "status":"Status",
+    "schholSelection":"School Selection Criteria",
+    "level":"Level",
+    "schoolType":"School Type",
+    "minStudPerClass":"Minimum students per class",
+    "schoolocation":"School Location",
+    "rural":"Rural",
+    "urban":"Urban",
+    "overall":"Overall percentage",
+   "note": "*Note the overall percentage must be 100",
+   "nameReq": "Assessment name is required",
+  "criteriaReq": "Criteria selection is required",
+  "typeReq":"Type selection is required",
+  "numOfSchool":"Number of School is required",
+
+  "assmtNameReq": "Assessment name is required",
+  "max":"Maximum 50 characters can be entered",
+  "alpha":"Name should be alphanumeric (only hyphen allowed)",
+  "only":"Only 200 characters allowed",
+  "numAllwd":"Only positive numbers allowed",
+  
+  "total":"Total No. of Days",
+  "save":"Save",
+  "cancel":"Cancel",
+"minStude" : "Minimum students per class is a required field",
+  "modeReq":"Mode is required",
+  "classReq":"Class is required"
+
+  },
+
+  "unverified":{
+    "enrolled":"Enrolled Listing",
+    "unverified":"Unverified",
+    "verified":"Verified"
+  },
+
+  "verified":{
+    "unverified":"Unverified",
+    "verified":"Verified",
+    "verifiedList":"Verified Listing"
+  },
+
+  "permission":{
+    "availableModule":"Available Modules",
+    "noModuleSelectedYet":"No Modules has been selected yet!!",
+    "read":"Read",
+    "add":"Add",
+    "edit":"Edit",
+    "delete":"Delete",
+    "savePermission":"Save Permissions"
+  }
+
+
+}

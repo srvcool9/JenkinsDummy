@@ -1,0 +1,119 @@
+<div class="animated fadeIn ">
+    <div class="responsive-display justify-content-between mt-3 mx-2 ">
+        <div class="col-sm-3 grid-header label-color">
+            <h4 style="font-weight: bold;" class="headingColor">
+                Scoring Weightage
+            </h4>
+        </div>
+
+    </div>
+
+    <div class="card-header ">
+        <div class="col-12 responsive-display justify-content-between">
+            <nav class="navigation-item mb-2 mt-2 d-flex">
+                <button routerLink="../sections" class="nav-users">Section</button>
+                <button routerLink="../weightage" class="nav-roles">Weightage</button>
+                <!-- <button routerLink="../parameters" class="nav-users1">Parameter</button> -->
+            </nav>
+        </div>
+    </div>
+    <div class="card">
+        <form [formGroup]="scoringWeightageForm" >
+            <div class="d-flex mb-3 mt-4 mx-3">
+            <div class="col-6 card">
+                <div class="mx-2">
+                    <input type="text" formControlName="scoringWeightageId" hidden/>
+                    <label class="mb-2">Academic <i class="asterik">*</i></label>
+                    <div class="col-5">
+                    <input type="number" class="form-control" formControlName="academic"
+                        onkeydown="if(event.key==='e' || event.key==='E'){event.preventDefault();}"
+                        id="input1"  (input)="sum()" step=".01"
+                        placeholder="Enter academic weightage" min="1" maxlength="100" />
+                    <small class="form-text text-muted" *ngIf="
+                        !academic.valid &&
+                        (academic.dirty || academic.touched)
+                      ">
+                        <span *ngIf="academic.errors['required']">
+                            This is a required field
+                        </span>
+                        <span *ngIf="academic.errors['max']">
+                            Maximum is 100
+                        </span>
+                        <span *ngIf="academic.errors['min']">
+                            Minimum is 1
+                        </span>
+                    </small>
+                </div>
+                </div>
+                <div class="mt-2 mx-2">
+                    <label class="mb-2"> Administration <i class="asterik">*</i></label>
+                <div class="col-5">
+                    <input type="number" class="form-control col-4" formControlName="administraion"
+                    id="input2"  (input)="sum()" step=".01"
+                        onkeydown="if(event.key==='e' || event.key==='E'){event.preventDefault();}"
+                        placeholder="Enter administraion weightage" min="1" max="100" />
+                    <small class="form-text text-muted" *ngIf="
+                        !administraion.valid &&
+                        (administraion.dirty || administraion.touched)
+                      ">
+                        <span *ngIf="administraion.errors['required']">
+                            This is a required field
+                        </span>
+                        <span *ngIf="administraion.errors['max']">
+                            Maximum is 100
+                        </span>
+                        <span *ngIf="administraion.errors['min']">
+                            Minimum is 1
+                        </span>
+                    </small>
+                </div>
+                </div>
+                <div class="mt-2 mx-2">
+                    <label class="mb-2">Infrastructure <i class="asterik">*</i></label>
+                <div class="col-5 mb-2">
+                    <input type="number" class="form-control col-4" formControlName="infra"
+                    id="input3"  (input)="sum()" step=".01"
+                        onkeydown="if(event.key==='e' || event.key==='E'){event.preventDefault();}"
+                        placeholder="Enter infrastructure weightage" min="1" max="100" />
+                    <small class="form-text text-muted" *ngIf="
+                        !infra.valid &&
+                        (infra.dirty || infra.touched)
+                      ">
+                        <span *ngIf="infra.errors['required']">
+                            This is a required field
+                        </span>
+                        <span *ngIf="infra.errors['max']">
+                            Maximum is 100
+                        </span>
+                        <span *ngIf="infra.errors['min']">
+                            Minimum is 1
+                        </span>
+                    </small>
+                </div>
+                </div>
+
+            </div>
+            <div class="col-6">
+                <div class="mx-3 mt-5">
+                    <label>Overall Weightage : </label>
+                    <input type="text" formControlName="overallPercent" readonly class="inpt1"
+                    [ngStyle]="{'color': colorvariable ? 'green' : 'red'}">
+                    <input type="text" readonly value="/ 100" class="inpt" />
+                    <div *ngIf="colorvariable===false" class="form-text text-muted">
+                        * Note the overall weightage should be 100</div> 
+                </div>
+            </div>
+        </div>
+            <div class="row-buttons mt-4 mb-5">
+                <button type="button" class="btn btn-primary mx-3" (click)="save()"
+                    [disabled]="scoringWeightageForm.invalid">
+                    {{'addAssmt.save'|translate}}
+                </button>
+                <button type="button" class="btn btn-danger" (click)="cancel()">
+                    {{'addAssmt.cancel'|translate}}
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>

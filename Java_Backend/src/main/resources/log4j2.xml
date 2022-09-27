@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+    <Properties>
+        <Property name="layout">%d{yyyy-MMM-dd HH:mm:ss} [%t] %-5level %-50c{1.} - %msg %n</Property>
+        <Property name="logdir">C:\apache-tomcat-9.0.64\logs</Property>
+<!--        <Property name="logdir">D:\\Logs</Property>-->
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${layout}" />
+        </Console>
+
+        <RollingFile name="CATALINA" fileName="${logdir}/catalina.log" filePattern="${logdir}/catalina.%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${layout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="CATALINA"/>
+        </Root>
+        <Logger name="org.apache.catalina.core.ContainerBase.[Catalina].[localhost]" level="info" additivity="false">
+            <AppenderRef ref="CATALINA"/>
+            <AppenderRef ref="Console" />
+        </Logger>
+    </Loggers>
+</Configuration>

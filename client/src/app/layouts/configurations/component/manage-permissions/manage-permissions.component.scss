@@ -1,0 +1,163 @@
+/* Style the buttons that are used to open and close the accordion panel */
+
+.main-class {
+    max-width: 1070px;
+}
+
+.accordion {
+    background-color: #fff;
+    color: #005391;
+    cursor: pointer;
+    padding: 15px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: -2px;
+    &:after {
+        content: "+";
+        float: left;
+        margin-right: 12px;
+        border: 1px solid #005391;
+        padding: 0px 4px 4px 5px;
+        border-radius: 100%;
+        background: #005391;
+        color: #fff;
+        font-size: 26px;
+        line-height: 23px;
+    }
+}
+
+
+.accordion-sub-menu {
+    margin: -12px;
+    background-color: #fff;
+    color: #005391;
+    cursor: pointer;
+    padding: 14px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    font-weight: 600;
+    &:after {
+        content: "+";
+        float: left;
+        margin-right: 12px;
+        border: 1px solid #005391;
+        padding: 0px 4px 4px 5px;
+        border-radius: 100%;
+        background: #005391;
+        color: #fff;
+        font-size: 26px;
+        line-height: 23px;
+    }
+}
+
+
+
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
+// .active,
+// .accordion:hover {
+//     background-color: #ccc;
+// }
+.panel a::selection {
+    color: #005391;
+}
+
+.panel a::-moz-selection {
+    color: #005391;
+}
+
+.panel {
+    padding: 0px 45px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+button.accordion.active:after {
+    content: "\2212";
+}
+
+.left-permission-card {
+    border-radius: 5px;
+    background: #fff;
+    position: relative;
+}
+
+.right-permission-card {
+    border-radius: 5px;
+    background: #fff;
+    position: relative;
+    left: 5px;
+}
+
+.card-header {
+    margin-top: 12px;
+    padding: 10px 15px;
+    background-color: #e4e5e6;
+    border-bottom: none;
+}
+
+.no_role-selected-txt {
+    text-align: center;
+    font-size: 18px;
+    margin: revert;
+}
+
+.panel a {
+    text-decoration: none;
+    color: #23282c;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+a.active{
+    color:black !important;
+    background-color: white !important;
+  }
+
+// media query
+@media (max-width: 767px) {
+    .left-permission-card {
+        position: relative;
+        right: 0px;
+    }
+    .right-permission-card {
+        position: relative;
+        top: 10px;
+        left: 0px
+    }
+}
+
+.float-container {
+    border: 3px solid #fff;
+    padding: 20px;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+}  
+
+
+.row-buttons {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-left: 17px;
+    margin-right: 53px;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+  }

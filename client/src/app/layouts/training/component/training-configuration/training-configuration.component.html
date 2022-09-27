@@ -1,0 +1,949 @@
+<div class="mt-1 mx-1" style="margin-bottom: 5rem !important;">
+    <div class="col-md-12 col-md-offset-3 card">
+
+        <h4 class="modal-title mx-2 mt-2 mb-2" style="color: #234280;font-weight: bold;">
+            Training Configuration
+        </h4>
+
+        <form [formGroup]="batchInfo">
+            <ul id="progressbar" class="d-flex p-0 mt-2 mx-3" style="margin-left: 4.8rem !important;">
+                <li [ngClass]="step >= 1 ? 'active ' : 'inactive'"></li>
+                <a [ngClass]="connectorC >=2 ? 'on' : 'off'"><span class="connector-visibility">
+                        {{connector}}</span></a>
+                <li [ngClass]="step >= 2 ? 'active' : 'inactive'"></li>
+                <a [ngClass]="connectorC >=3 ? 'on' : 'off'"><span class="connector-visibility">
+                        {{connector}}</span></a>
+                <li [ngClass]="step >= 3 ? 'active' : 'inactive'"></li>
+                <a [ngClass]="connectorC >=4 ? 'on' : 'off'"><span class="connector-visibility">
+                        {{connector}}</span></a>
+                <li [ngClass]="step >= 4 ? 'active' : 'inactive'"></li>
+                <a [ngClass]="connectorC >=5 ? 'on' : 'off'"><span class="connector-visibility">
+                        {{connector}}</span></a>
+                <li [ngClass]="step >= 5 ? 'active' : 'inactive'"></li>
+                <a [ngClass]="connectorC >=6 ? 'on' : 'off'"><span class="connector-visibility">
+                        {{connector}}</span></a>
+                <li [ngClass]="step >= 6 ? 'active' : 'inactive'"></li>
+            </ul>
+
+            <ul class="d-flex p-0 mt-0 mx-3" style="margin-top: -1rem !important;">
+                <li class="content" style="margin-left: 2.5rem;">BATCH INFORMATION</li>
+                <li style="margin-left: 8.1rem;" class="content">RANGE</li>
+                <li style="margin-left: 10rem;" class="content">ASSESSMENT</li>
+                <li style="margin-left: 8.5rem;" class="content">TRAINING MATERIAL</li>
+                <li style="margin-left: 8.5rem;" class="content">CHECKLIST</li>
+                <li style="margin-left: 10rem;" class="content">MONITORING QUESTIONS</li>
+            </ul>
+
+            <fieldset *ngIf="step == 1" class="m-5">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="mb-2">Number of Days </label>
+                        <input type="number"
+                            onkeydown="if(event.key==='.' || event.key==='e' || event.key==='E'){event.preventDefault();}"
+                            step="1" min="1" max="10" class="form-control" placeholder="Enter number of days"
+                            formControlName="numberOfDays" (input)="getNumberOfDays($event)" />
+                        <small id="error"></small>
+                        <small class="form-text text-muted font-validate" *ngIf="
+                            !numberOfDays.valid && (numberOfDays.dirty || numberOfDays.touched)
+                          ">
+                            <span *ngIf="numberOfDays.errors['required']">
+                                Number of days is a required field !!
+                            </span>
+                        </small>
+                        <small class="form-text text-muted font-validate" *ngIf="
+                        !numberOfDays.valid && (numberOfDays.dirty || numberOfDays.touched)
+                          ">
+                            <span>
+                                Number of Days should not be greater than 10
+                            </span>
+                        </small>
+
+                    </div>
+                    <div class="col-md-4">
+                        <label class="mb-2">Minimum Trainer </label>
+                        <input type="number"
+                            onkeydown="if(event.key==='.' || event.key==='e' || event.key==='E'){event.preventDefault();}"
+                            step="1" min="1" class="form-control" placeholder="Enter minimum trainer"
+                            formControlName="minTrainer" />
+                        <small class="form-text text-muted font-validate" *ngIf="
+                            !minTrainer.valid && (minTrainer.dirty || minTrainer.touched)
+                          ">
+                            <span *ngIf="minTrainer.errors['required']">
+                                Minimum Trainer is a required field
+                            </span>
+                        </small>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="mb-2">Maximum Batch Size </label>
+                        <input type="number"
+                            onkeydown="if(event.key==='.' || event.key==='e' || event.key==='E'){event.preventDefault();}"
+                            step="1" min="1" class="form-control" placeholder="Enter maximum batch size"
+                            formControlName="maxBatchSize" />
+                        <small class="form-text text-muted font-validate" *ngIf="
+                            !maxBatchSize.valid && (maxBatchSize.dirty || maxBatchSize.touched)
+                          ">
+                            <span *ngIf="maxBatchSize.errors['required']">
+                                Maximum Batch Size is a required field
+                            </span>
+                        </small>
+                    </div>
+                    <div style="margin-top:5rem !important">
+                        <button type="button" class="btn btn-primary pull-right mx-3" [disabled]="batchInfo.invalid"
+                            (click)="next()">
+                            Save & Next
+                        </button>
+                        <button type="button" class="btn btn-danger pull-right" (click)="cancelBatchInfo()">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <form [formGroup]="range" style="overflow-x: hidden;">
+            <fieldset *ngIf="step == 2">
+                <div class="row" style="margin-left: 200px;" *ngIf="dataLevel2.trainingLevelId.id===41 || 
+                dataLevel2.trainingLevelId.id===42 || dataLevel2.trainingLevelId.id===43">
+                    <div class="col-md-3" *ngIf="dataLevel2.trainingLevelId.id===41
+                    || dataLevel2.trainingLevelId.id===42 || dataLevel2.trainingLevelId.id===43">
+                        <label class="mb-2">Division </label>
+                        <ng-select placeholder="Select Division" [clearable]="false" [searchable]="false"
+                            [items]="divisionData" bindLabel="name" bindValue="id" (change)="divisionOnChange($event)"
+                            formControlName="division">
+                        </ng-select>
+
+                    </div>
+                    <div class="col-md-3" *ngIf="dataLevel2.trainingLevelId.id===42 || 
+                    dataLevel2.trainingLevelId.id===43">
+                        <label class="mb-2">District </label>
+                        <ng-select placeholder="Select District" [clearable]="false" [searchable]="false"
+                            [items]="districtData" bindLabel="name" bindValue="id" (change)="districtOnChange($event)"
+                            formControlName="district">
+                        </ng-select>
+
+                    </div>
+                    <div class="col-md-3" *ngIf="dataLevel2.trainingLevelId.id===43">
+                        <label class="mb-2">Block </label>
+                        <ng-select placeholder="Select Block" [clearable]="false" [searchable]="false"
+                            [items]="blockData" bindLabel="name" bindValue="id" formControlName="block"
+                            (change)="blockOnChange($event)">
+                        </ng-select>
+
+                    </div>
+                    <div class="col-md-3 mt-4">
+                        <button class="btn btn-dark" (click)="add()" [disabled]="disabledBtn">
+                            <h6>
+                                <strong><i class="fa fa-plus"></i></strong>
+                            </h6>
+                        </button>
+                    </div>
+
+                    <div class="col-md-12 mt-4">
+                        <ag-grid-angular style="width: 75%; height: 40vh;" class="ag-theme-alpine grid px-2 mt-2"
+                            [animateRows]="true" [rowData]="trainingAreaList" [gridOptions]="gridOptions"
+                            [columnDefs]="columnDefs" [frameworkComponents]="frameworkComponents" [animateRows]="true"
+                            [pagination]="true" (gridReady)="onGridReady($event)">
+                        </ag-grid-angular>
+                    </div>
+
+                    <div class="mt-4">
+
+                        <button type="button" class="btn btn-primary-blue pull-left margin-x-9 mb-4"
+                            (click)="previous()">
+                            Previous
+                        </button>
+
+                        <button type="button" class="btn btn-primary pull-right mx-3 mb-4" (click)="next()"
+                            [disabled]="rangeValid">
+                            Save & Next
+                        </button>
+                        <button type="button" class="btn btn-danger pull-right mb-4" (click)="cancelRange()">
+                            Cancel
+                        </button>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="row" style="margin-left: 200px;" *ngIf="dataLevel2.trainingLevelId.id===40">
+                    <div class="col-md-3">
+                        <label class="mb-2">State </label>
+                        <input type="text" value="Madhya Pradesh" disabled />
+                    </div>
+
+                    <div class="col-md-12 mt-4">
+                        <ag-grid-angular style="width: 75%; height: 40vh; text-align: initial"
+                            class="ag-theme-alpine grid px-2 mt-2" [animateRows]="true" [rowData]="stateList"
+                            [gridOptions]="gridOptions" [columnDefs]="columnDefs"
+                            [frameworkComponents]="frameworkComponents" [animateRows]="true" [pagination]="true"
+                            (gridReady)="onGridReady($event)">
+                        </ag-grid-angular>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="button" class="btn btn-primary-blue pull-left mx-3" (click)="previous()">
+                            Previous
+                        </button>
+                        <button type="button" class="btn btn-primary pull-right mx-3" (click)="next()">
+                            Save & Next
+                        </button>
+                        <button type="button" class="btn btn-danger pull-right" (click)="cancelRange()">
+                            Cancel
+                        </button>
+                    </div>
+
+                </div>
+            </fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+        </form>
+        <form [formGroup]="assessment">
+            <fieldset *ngIf="step == 3">
+                <div class="row m-3">
+                    <div class="col-4">
+                        <label class="pb-2">Select Quiz </label>
+                        <ng-select placeholder="Select Quiz" [clearable]="false" [searchable]="false" [items]="quizList"
+                            [dropdownPosition]="'bottom'" bindLabel="name" bindValue="id" class="mx-2"
+                            formControlName="selectedQuiz" (change)="selectedQuiz($event)"
+                            [readonly]="selectQuizDisable">
+                        </ng-select>
+                        <small class="form-text text-muted font-validate" *ngIf="
+                        !selectedQuize.valid && (selectedQuize.dirty || selectedQuize.touched)
+                      ">
+                            <span *ngIf="selectedQuize.errors['required']" class="mx-2">
+                                Select Quiz is a required field
+                            </span>
+                        </small>
+                    </div>
+                    <!-- <div class="col-4" *ngIf="dailySelected">
+                        <label class="pb-2">Select Days </label>
+
+                        <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="dropdownList">
+                        </ng-multiselect-dropdown>
+                    </div> -->
+                    <div class="col-7" style="margin-top: 1.7rem;">
+                        <button type="button" class="btn btn-primary  mx-3" (click)="addAssessment()">
+                            Add Assessment
+                        </button>
+                    </div>
+                    <div>
+                        <div *ngIf="prePostForm === true" class="px-3 mt-3 col-12">
+                            <!-- <nav class="navigation-item mb-4 mt-4">
+                                <button [ngClass]="preTestBtnColor ? 'blue1' : 'grey1' " data-target="#PreTest"
+                                    (click)="addPreTestPanel()">
+                                    Pre Test
+                                </button>
+                                <button data-target="#PostTest" (click)="addPostTestPanel()"
+                                    [ngClass]="postTestBtnColor ? 'blue2' : 'grey2' ">
+                                    Post Test
+                                </button>
+                            </nav> -->
+                            <div class="d-flex">
+                                <span *ngFor="let test of prePost; let indexValue = index">
+                                    <button class="d-flex"
+                                        [ngClass]="indexValue===activeButton ? 'nav-roles':'nav-users'"
+                                        (click)="testSelection(test.id)">
+                                        {{test.name}}
+                                    </button>
+                                </span>
+                            </div>
+                            <div>
+
+
+                                <div class="col-12">
+                                    <form [formGroup]="assessment[selectedtestIndex]">
+                                        <div class="card row m-2">
+                                            <div class="col-7 d-flex mt-3">
+                                                <label class="col-2"> Total Questions : </label>
+                                                <input type="number"
+                                                    onkeydown="if(event.key==='.' || event.key==='e' || event.key==='E'){event.preventDefault();}"
+                                                    step="1" min="0" class="form-control" class="col-5 px-2"
+                                                    placeholder="Enter Total Questions"
+                                                    formControlName="totalQuestions" />
+                                                <button class="fa fa-save mx-2 pt-3"
+                                                    (click)="onTotalQuestionSaveClick(selectedtestIndex)" title="Save"
+                                                    style="background-color:transparent;border:none; color: #1f5a16; margin-top: -10px !important;"></button>
+                                                <!-- <button class="fas fa-edit mt-2" (click)="onTotalQuestionEditClick()"
+                                                style="background-color:transparent;border:none; color: #1265cc; margin-top: -10px !important;"
+                                                [hidden]="hiddenEdit" [disabled]="totalQuestions.invalid"></button> -->
+                                            </div>
+                                            <div class="col-7 margin-x-8 mb-3">
+                                                <small class="form-text text-muted font-validate" *ngIf="
+                                                    !assessment[selectedtestIndex].controls['totalQuestions'].valid && 
+                                                    (assessment[selectedtestIndex].controls['totalQuestions'].dirty ||
+                                                     assessment[selectedtestIndex].controls['totalQuestions'].touched)
+                                                  ">
+                                                    <span
+                                                        *ngIf="assessment[selectedtestIndex].controls['totalQuestions'].errors['required']"
+                                                        class="mx-2">
+                                                        Total number of question is a required field
+                                                    </span>
+                                                </small>
+                                            </div>
+                                            <!-- <small class="form-text text-muted font-validate" *ngIf="
+                                        !totalQuestions.valid && (totalQuestions.dirty || totalQuestions.touched)
+                                      " style="margin-left: 10rem !important;">
+                                            <span *ngIf="totalQuestions.errors['required']">
+                                                Total Questions is a required field
+                                            </span>
+                                        </small> -->
+                                            <div formArrayName="questionnaire">
+                                                <div class="drag-box" cdkDropList
+                                                    [cdkDropListData]="arrayFordragDropPrePost"
+                                                    (cdkDropListDropped)="preDrop($event)">
+                                                    <div class="card mb-2"
+                                                        *ngFor="let question of questions(selectedtestIndex).controls; let questionIndex=index"
+                                                        cdkDragLockAxis="y" cdkDrag>
+
+                                                        <div class=" m-2" [formGroupName]="questionIndex">
+                                                            <div class="d-flex">Q.{{questionIndex + 1}}
+                                                                <input formControlName="question" for="questionIndex"
+                                                                    type="text" class="mx-2 form-control"
+                                                                    placeholder="Enter Questions" />
+                                                            </div>
+                                                            <div>
+                                                                <small class="form-text text-muted font-validate" *ngIf="questions(selectedtestIndex).controls[questionIndex].get('question')?.invalid && 
+                                                                (questions(selectedtestIndex).controls[questionIndex].get('question')?.dirty ||
+                                                                questions(selectedtestIndex).controls[questionIndex].get('question')?.touched)
+                                                              ">
+                                                                    <span
+                                                                        *ngIf="questions(selectedtestIndex).controls[questionIndex].get('question')?.errors?.['required']"
+                                                                        class="mx-4">
+                                                                        Question is a required field
+                                                                    </span>
+                                                                </small>
+                                                            </div>
+                                                            <div class="m-1">
+                                                                <div class="d-flex">
+                                                                    <input type="radio" formControlName="answer"
+                                                                        class="form-check-input mx-3 mt-3" value="1" />
+                                                                    <span style="padding-top: 11px;">a.</span>
+                                                                    <input formControlName="option1" type="text" for="1"
+                                                                        class="m-2 form-control" />
+
+                                                                </div>
+                                                                <div>
+                                                                    <small class="form-text text-muted font-validate"
+                                                                        *ngIf="questions(selectedtestIndex).controls[questionIndex].get('option1')?.invalid && 
+                                                    (questions(selectedtestIndex).controls[questionIndex].get('option1')?.dirty ||
+                                                    questions(selectedtestIndex).controls[questionIndex].get('option1')?.touched)
+                                                  ">
+                                                                        <span
+                                                                            *ngIf="questions(selectedtestIndex).controls[questionIndex].get('option1')?.errors?.['required']"
+                                                                            class="mx-four">
+                                                                            Option 1 is a required field
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                                <div class="d-flex">
+                                                                    <input type="radio" formControlName="answer"
+                                                                        class="form-check-input mx-3 mt-3" value="2" />
+                                                                    <span style="padding-top: 11px;">b.</span>
+                                                                    <input type="text" for="2" class="m-2 form-control"
+                                                                        formControlName="option2" />
+
+                                                                </div>
+                                                                <div>
+                                                                    <small class="form-text text-muted font-validate"
+                                                                        *ngIf="questions(selectedtestIndex).controls[questionIndex].get('option2')?.invalid && 
+                                                    (questions(selectedtestIndex).controls[questionIndex].get('option2')?.dirty ||
+                                                    questions(selectedtestIndex).controls[questionIndex].get('option2')?.touched)
+                                                  ">
+                                                                        <span
+                                                                            *ngIf="questions(selectedtestIndex).controls[questionIndex].get('option2')?.errors?.['required']"
+                                                                            class="mx-four">
+                                                                            Option 2 is a required field
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                                <div class="d-flex">
+                                                                    <input type="radio" formControlName="answer"
+                                                                        class="form-check-input mx-3 mt-3" value="3" />
+                                                                    <span style="padding-top: 11px;">c.</span>
+                                                                    <input type="text" for="3" class="m-2 form-control"
+                                                                        formControlName="option3" />
+
+                                                                </div>
+                                                                <div>
+                                                                    <small class="form-text text-muted font-validate"
+                                                                        *ngIf="questions(selectedtestIndex).controls[questionIndex].get('option3')?.invalid && 
+                                                    (questions(selectedtestIndex).controls[questionIndex].get('option3')?.dirty ||
+                                                    questions(selectedtestIndex).controls[questionIndex].get('option3')?.touched)
+                                                  ">
+                                                                        <span
+                                                                            *ngIf="questions(selectedtestIndex).controls[questionIndex].get('option3')?.errors?.['required']"
+                                                                            class="mx-four">
+                                                                            Option 3 is a required field
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                                <div class="d-flex">
+                                                                    <input type="radio" formControlName="answer"
+                                                                        class="form-check-input mx-3 mt-3" value="4" />
+                                                                    <span style="padding-top: 11px;">d.</span>
+                                                                    <input type="text" for="4" class="m-2 form-control"
+                                                                        formControlName="option4" />
+
+                                                                </div>
+                                                                <div>
+                                                                    <small class="form-text text-muted font-validate"
+                                                                        *ngIf="questions(selectedtestIndex).controls[questionIndex].get('option4')?.invalid && 
+                                                    (questions(selectedtestIndex).controls[questionIndex].get('option4')?.dirty ||
+                                                    questions(selectedtestIndex).controls[questionIndex].get('option4')?.touched)
+                                                  ">
+                                                                        <span
+                                                                            *ngIf="questions(selectedtestIndex).controls[questionIndex].get('option4')?.errors?.['required']"
+                                                                            class="mx-four">
+                                                                            Option 4 is a required field
+                                                                        </span>
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <button type="button" (click)="removeQuestion(questionIndex)">
+                                                        Remove Questions
+                                                    </button> -->
+
+                                                            <div class="pull-right mt-2">
+                                                                <button class="fa fa-save"
+                                                                    (click)="addQuestion(questionIndex, selectedtestIndex)"
+                                                                    title="Save Question"
+                                                                    style="background-color:transparent;border:none; color: #1f5a16">
+                                                                </button>
+                                                                <button class="fa fa-trash"
+                                                                    (click)="removeQuestion(questionIndex, selectedtestIndex)"
+                                                                    style="background-color:transparent;border:none; color: #dc3545;">
+                                                                </button>
+                                                                <!-- <button class="fas fa-edit"
+                                                                    style="background-color:transparent;border:none; color: #1265cc;">
+                                                                </button> -->
+                                                            </div>
+                                                            <!-- <button type="button" (click)="addQuestion()">
+                                                        Add Questions
+                                                    </button> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+
+
+                        <div *ngIf="dailyTestForm" class="px-3 mt-3 ">
+                            <div class="d-flex">
+                                <span *ngFor="let day of day; let indexValue = index">
+                                    <button class="d-flex"
+                                        [ngClass]="indexValue===activeButton ? 'nav-roles1':'nav-users1'"
+                                        (click)="daySelection(indexValue)">
+                                        <label class="mx-3 mt-1"> {{day.name}}</label>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="col-12">
+                                <form [formGroup]="assessment[selectedDayIndex]">
+                                    <div class="card row m-2">
+                                        <div class="col-7 d-flex mt-3 mb-3">
+                                            <label class="col-2"> Total Questions : </label>
+                                            <input type="number"
+                                                onkeydown="if(event.key==='.' || event.key==='e' || event.key==='E'){event.preventDefault();}"
+                                                step="1" min="0" class="form-control" class="col-5 px-2"
+                                                placeholder="Enter Total Number of Questions"
+                                                formControlName="totalQuestions" />
+                                            <button class="fa fa-save mx-2 pt-3"
+                                                (click)="onDailyTotalQuesSave(selectedDayIndex)" title="Save"
+                                                style="background-color:transparent;border:none; color: #1f5a16; margin-top: -10px !important;"></button>
+                                            <!-- <button class="fas fa-edit mt-2" (click)="onTotalQuestionEditClick()"
+                                                style="background-color:transparent;border:none; color: #1265cc; margin-top: -10px !important;"
+                                                [hidden]="hiddenEdit" [disabled]="totalQuestions.invalid"></button> -->
+                                        </div>
+                                        <div class="col-7 margin-x-8 mb-3">
+                                            <small class="form-text text-muted font-validate" *ngIf="
+                                                !assessment[selectedtestIndex].controls['totalQuestions'].valid && 
+                                                (assessment[selectedtestIndex].controls['totalQuestions'].dirty ||
+                                                 assessment[selectedtestIndex].controls['totalQuestions'].touched)
+                                              ">
+                                                <span
+                                                    *ngIf="assessment[selectedtestIndex].controls['totalQuestions'].errors['required']"
+                                                    class="mx-2">
+                                                    Total number of question is a required field
+                                                </span>
+                                            </small>
+                                        </div>
+                                        <!-- <small class="form-text text-muted font-validate" *ngIf="
+                                        !totalQuestions.valid && (totalQuestions.dirty || totalQuestions.touched)
+                                      " style="margin-left: 10rem !important;">
+                                            <span *ngIf="totalQuestions.errors['required']">
+                                                Total Questions is a required field
+                                            </span>
+                                        </small> -->
+                                        <div formArrayName="questionnaire">
+                                            <div class="drag-box" cdkDropList [cdkDropListData]="arrayFordragDropDaily"
+                                                (cdkDropListDropped)="dailyDrop($event)">
+                                                <div class="card mb-2"
+                                                    *ngFor="let question of dailyQuestions(selectedDayIndex).controls; let questionIndex=index"
+                                                    cdkDragLockAxis="y" cdkDrag>
+
+                                                    <div class=" m-2" [formGroupName]="questionIndex">
+                                                        <div class="d-flex">Q.{{questionIndex + 1}}
+                                                            <input formControlName="question" for="questionIndex"
+                                                                type="text" class="mx-2 form-control"
+                                                                placeholder="Enter Questions" />
+
+                                                        </div>
+                                                        <div>
+                                                            <small class="form-text text-muted font-validate" *ngIf="dailyQuestions(selectedDayIndex).controls[questionIndex].get('question')?.invalid && 
+                                               (dailyQuestions(selectedDayIndex).controls[questionIndex].get('question')?.dirty ||
+                                               dailyQuestions(selectedDayIndex).controls[questionIndex].get('question')?.touched)
+                                             ">
+                                                                <span
+                                                                    *ngIf="dailyQuestions(selectedDayIndex).controls[questionIndex].get('question')?.errors?.['required']"
+                                                                    class="mx-4">
+                                                                    Question is a required field
+                                                                </span>
+                                                            </small>
+                                                        </div>
+                                                        <div class="m-1">
+                                                            <div class="d-flex">
+                                                                <input type="radio" formControlName="answer"
+                                                                    class="form-check-input mx-3 mt-3" value="1" />
+                                                                <span style="padding-top: 11px;">a.</span>
+                                                                <input formControlName="option1" type="text" for="1"
+                                                                    class="m-2 form-control" />
+
+                                                            </div>
+                                                            <div>
+                                                                <small class="form-text text-muted font-validate" *ngIf="dailyQuestions(selectedDayIndex).controls[questionIndex].get('option1')?.invalid && 
+                                                   (dailyQuestions(selectedDayIndex).controls[questionIndex].get('option1')?.dirty ||
+                                                   dailyQuestions(selectedDayIndex).controls[questionIndex].get('option1')?.touched)
+                                                 ">
+                                                                    <span
+                                                                        *ngIf="dailyQuestions(selectedDayIndex).controls[questionIndex].get('option1')?.errors?.['required']"
+                                                                        class="mx-four">
+                                                                        Option 1 is a required field
+                                                                    </span>
+                                                                </small>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <input type="radio" formControlName="answer"
+                                                                    class="form-check-input mx-3 mt-3" value="2" />
+                                                                <span style="padding-top: 11px;">b.</span>
+                                                                <input type="text" for="2" class="m-2 form-control"
+                                                                    formControlName="option2" />
+
+                                                            </div>
+                                                            <div>
+                                                                <small class="form-text text-muted font-validate" *ngIf="dailyQuestions(selectedDayIndex).controls[questionIndex].get('option2')?.invalid && 
+                                                   (dailyQuestions(selectedDayIndex).controls[questionIndex].get('option2')?.dirty ||
+                                                   dailyQuestions(selectedDayIndex).controls[questionIndex].get('option2')?.touched)
+                                                 ">
+                                                                    <span
+                                                                        *ngIf="dailyQuestions(selectedDayIndex).controls[questionIndex].get('option2')?.errors?.['required']"
+                                                                        class="mx-four">
+                                                                        Option 2 is a required field
+                                                                    </span>
+                                                                </small>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <input type="radio" formControlName="answer" value="3"
+                                                                    class="mx-3 mt-3 form-check-input" />
+                                                                <span style="padding-top: 11px;">c.</span>
+                                                                <input type="text" for="3" class="m-2 form-control"
+                                                                    formControlName="option3" />
+
+                                                            </div>
+                                                            <div>
+                                                                <small class="form-text text-muted font-validate" *ngIf="dailyQuestions(selectedDayIndex).controls[questionIndex].get('option3')?.invalid && 
+                                                   (dailyQuestions(selectedDayIndex).controls[questionIndex].get('option3')?.dirty ||
+                                                   dailyQuestions(selectedDayIndex).controls[questionIndex].get('option3')?.touched)
+                                                 ">
+                                                                    <span
+                                                                        *ngIf="dailyQuestions(selectedDayIndex).controls[questionIndex].get('option3')?.errors?.['required']"
+                                                                        class="mx-four">
+                                                                        Option 3 is a required field
+                                                                    </span>
+                                                                </small>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <input type="radio" formControlName="answer" value="4"
+                                                                    class="mx-3 mt-3 form-check-input" />
+                                                                <span style="padding-top: 10px;">d.</span>
+                                                                <input type="text" for="4" class="m-2 form-control"
+                                                                    formControlName="option4" />
+
+                                                            </div>
+                                                            <div>
+                                                                <small class="form-text text-muted font-validate" *ngIf="dailyQuestions(selectedDayIndex).controls[questionIndex].get('option4')?.invalid && 
+                                                   (dailyQuestions(selectedDayIndex).controls[questionIndex].get('option4')?.dirty ||
+                                                   dailyQuestions(selectedDayIndex).controls[questionIndex].get('option4')?.touched)
+                                                 ">
+                                                                    <span
+                                                                        *ngIf="dailyQuestions(selectedDayIndex).controls[questionIndex].get('option4')?.errors?.['required']"
+                                                                        class="mx-four">
+                                                                        Option 4 is a required field
+                                                                    </span>
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <button type="button" (click)="removeQuestion(questionIndex)">
+                                                        Remove Questions
+                                                    </button> -->
+                                                        <div class="pull-right mt-2">
+                                                            <button class="fa fa-save"
+                                                                (click)="addDailyQuestion(questionIndex, selectedDayIndex)"
+                                                                title="Save Question"
+                                                                style="background-color:transparent;border:none; color: #1f5a16">
+                                                            </button>
+                                                            <button class="fa fa-trash"
+                                                                (click)="removeDailyQuestion(questionIndex, selectedDayIndex)"
+                                                                style="background-color:transparent;border:none; color: #dc3545;">
+                                                            </button>
+                                                            <!-- <button class="fas fa-edit"
+                                                                style="background-color:transparent;border:none; color: #1265cc;">
+                                                            </button> -->
+                                                        </div>
+                                                        <!-- <button type="button" (click)="addQuestion()">
+                                                        Add Questions
+                                                    </button> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+
+
+                        <div style="margin-top: 8rem !important;">
+                            <button type="button" class="btn btn-primary-blue pull-left mx-3" (click)="previous()">
+                                Previous
+                            </button>
+                            <button type="button" class="btn btn-primary pull-right mx-3"
+                                [disabled]="saveNextDisableForTest" (click)="next()">
+                                Save & Next
+                            </button>
+                            <button type="button" class="btn btn-danger pull-right" (click)="cancelAssessment()">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <form [formGroup]="trainingMaterial">
+            <fieldset *ngIf="step == 4">
+                <div class="container">
+                    <div class="row gy-4">
+                        <div class="col-sm">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div style="display: flex">
+                                        <label class="col-md-4 mt-2">Document Name</label>
+
+                                        <input type="text" class="form-control mx-4" formControlName="documentName"
+                                            placeholder="Enter document name" />
+
+                                        <button class="btn btn-dark mt-0" style="margin-left: 0px; visibility: hidden;">
+                                            <h6>
+                                                <strong><i class="fa fa-plus"></i></strong>
+                                            </h6>
+                                        </button>
+                                    </div>
+                                    <small class="form-text text-muted mb-3"
+                                        *ngIf="!documentName.valid && (documentName.dirty ||documentName.touched) ">
+                                        <span *ngIf="documentName.errors['required']" style="margin-left:40%">
+                                            Document name is a required field
+                                        </span>
+
+                                        <span *ngIf="documentName.errors['maxlength']" style="margin-left:40%">
+                                            Maximum length is 50 characters
+                                        </span>
+                                    </small>
+                                    <div style="display: flex" class="mt-3">
+                                        <label class="col-md-4 mt-0">Upload Training Material</label>
+                                        <input type="file" class="form-control mx-4" accept="application/pdf"
+                                            formControlName="trainingMaterial" placeholder="Upload document" title=" "
+                                            ngDefaultControl (change)="uploadDoc($event)" />
+                                        <button class="btn btn-dark mt-1" style="margin-left: 0px;"
+                                            (click)="addDocMaterial()">
+                                            <h6>
+                                                <strong><i class="fa fa-plus"></i></strong>
+                                            </h6>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-12 mt-4">
+                                        <ag-grid-angular style="width: 100%; height: 40vh; text-align: initial"
+                                            (firstDataRendered)="onFirstDataRendered($event)"
+                                            class="ag-theme-alpine grid px-2 mt-2" [animateRows]="true"
+                                            [rowData]="documentList" [gridOptions]="gridOptions1"
+                                            [columnDefs]="columnDefsDoc" [frameworkComponents]="frameworkComponents"
+                                            [animateRows]="true" [pagination]="true" (gridReady)="onGridReady1($event)">
+                                        </ag-grid-angular>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div style="display: flex">
+                                        <label class="col-md-4 mt-2">Name of Link</label>
+                                        <input type="text" class="form-control mx-4" formControlName="link"
+                                            placeholder="Enter Link Name" />
+                                        <button class="btn btn-dark mt-1" style="margin-left: 0px; visibility: hidden;">
+                                            <h6>
+                                                <strong><i class="fa fa-plus"></i></strong>
+                                            </h6>
+                                        </button>
+                                    </div>
+                                    <small class="form-text text-muted mb-3"
+                                        *ngIf="!linkName.valid && (linkName.dirty ||linkName.touched) ">
+                                        <span *ngIf="linkName.errors['required']" style="margin-left:40%">
+                                            Link name is a required field
+                                        </span>
+
+                                        <span *ngIf="linkName.errors['maxlength']" style="margin-left:40%">
+                                            Maximum length is 50 characters
+                                        </span>
+                                    </small>
+                                    <div style="display: flex" class="mt-3">
+                                        <label class="col-md-4 mt-0">Upload Material Link</label>
+                                        <input type="text" class="form-control mx-4" formControlName="linkMaterial"
+                                            placeholder="Enter Material Link" />
+                                        <button class="btn btn-dark mt-1" style="margin-left: 0px;"
+                                            (click)="addLinkMaterial()">
+                                            <h6>
+                                                <strong><i class="fa fa-plus"></i></strong>
+                                            </h6>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-12 mt-4">
+                                        <ag-grid-angular style="width: 100%; height: 40vh; text-align: initial"
+                                            (firstDataRendered)="onFirstDataRendered($event)"
+                                            class="ag-theme-alpine grid px-2 mt-2" [animateRows]="true"
+                                            [rowData]="linksList" [gridOptions]="gridOptions2"
+                                            [columnDefs]="columnDefsLink" [frameworkComponents]="frameworkComponents"
+                                            [animateRows]="true" [pagination]="true" (gridReady)="onGridReady2($event)">
+                                        </ag-grid-angular>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="button" class="btn btn-primary-blue pull-left mx-3 mb-4" (click)="previous()">
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary pull-right mx-3 mb-4" (click)="next()">
+                        Save & Next
+                    </button>
+                    <button type="button" class="btn btn-danger pull-right mb-4" (click)="cancelTrainingMaterial()">
+                        Cancel
+                    </button>
+                </div>
+                <!-- <input (click)="submit()" type="submit" name="submit" class="submit action-button" value="Submit" /> -->
+            </fieldset>
+        </form>
+
+
+
+        <fieldset *ngIf="step === 5" style="overflow-x: hidden;">
+
+            <form [formGroup]="empForm">
+                <div formArrayName="checkList" style="margin-left:11rem; margin-right: 11rem;">
+                    <div *ngFor="let employee of employees.controls; let empIndex=index;">
+                        <div [formGroupName]="empIndex" class="card mt-3">
+                            <div style="display: flex;" class="mt-4">
+                                <div class="col-md-3">
+                                    <label class="mb-2 mt-2 mx-4"> Checklist Name (if any) </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" formControlName="checkListName" />
+                                    <small class="form-text text-muted">
+                                        <span
+                                            *ngIf="employees.controls[empIndex].get('checkListName')?.errors?.['maxlength']">
+                                            Maximum 50 characters allowed
+                                        </span>
+                                        <span
+                                            *ngIf="employees.controls[empIndex].get('checkListName')?.errors?.['pattern']">
+                                            Only alphanumeric characters and hyphen allowed
+                                        </span>
+
+                                    </small>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                            <br />
+                            <div style="display: flex;">
+                                <div class="col-md-3">
+                                    <label class="mb-2 mt-2 mx-4"> Checklist Item </label>
+                                </div>
+                                <div formArrayName="checkListItems">
+                                    <div *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index">
+                                        <div [formGroupName]="skillIndex">
+                                            <div style="display: flex;">
+                                                <div>
+                                                    <input type="text" formControlName="checkListItemName"
+                                                        class="form-control mb-2" style="width:20rem" />
+                                                    <small class="form-text text-muted"
+                                                        *ngIf="!employeeSkills(empIndex).controls[skillIndex].get('checkListItemName')?.valid &&
+                                                        (employeeSkills(empIndex).controls[skillIndex].get('checkListItemName')?.touched || employeeSkills(empIndex).controls[skillIndex].get('checkListItemName')?.dirty)">
+                                                        <span
+                                                            *ngIf="employeeSkills(empIndex).controls[skillIndex].get('checkListItemName')?.errors?.['required']">
+                                                            Enter checklist item name
+                                                        </span>
+                                                        <span
+                                                            *ngIf="employeeSkills(empIndex).controls[skillIndex].get('checkListItemName')?.errors?.['maxlength']">
+                                                            Maximum 50 characters allowed
+                                                        </span>
+                                                        <span
+                                                            *ngIf="employeeSkills(empIndex).controls[skillIndex].get('checkListItemName')?.errors?.['pattern']">
+                                                            Only alphanumeric characters and hyphen allowed
+                                                        </span>
+                                                    </small>
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        style="background-color:transparent;border:none;color:#DC3545;font-size:1.5rem"
+                                                        class="fa fa-minus-circle mx-3 mt-1" aria-hidden="true"
+                                                        [hidden]="dltBtnHidden"
+                                                        (click)="removeEmployeeSkill(employeeSkills(empIndex).controls[skillIndex].get('checkListItemId'),empIndex,skillIndex)"></button>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex;">
+                                <div class="col-md-11">
+                                    <button type="button" (click)="addEmployeeSkill(empIndex)"
+                                        style="margin-left: 0px; width: 17%"
+                                        class="btn btn-primary-blue mb-4 mx-4 mt-2">
+                                        <strong class="fa fa-plus"></strong>&nbsp; Add More Items
+                                    </button>
+                                </div>
+                                <div>
+                                    <!-- <button type="button" (click)="onSubmit()" [disabled]="empForm.invalid"
+                                        style="float:right" class="btn btn-primary mb-4 mx-0 mt-2">
+                                        Save
+                                    </button> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex;">
+                            <div class="col-md-12">
+                                <button type="button" (click)="addEmployee()" style="margin-left: 0px; width: 20%"
+                                    class="btn btn-primary-blue mb-4 mt-3">
+                                    <strong class="fa fa-plus"></strong>&nbsp; Add Another Checklist</button>
+                            </div>
+                            <div class="col-md-3">
+                                <button style="background-color:transparent;border:none;color:#DC3545;font-size: 1.8rem"
+                                    class="fa fa-minus-circle mt-3" aria-hidden="true" [hidden]="dltBtnHidden"
+                                    (click)="removeEmployee(employee,empIndex)"></button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <div class="mt-4">
+                <button type="button" class="btn btn-primary-blue pull-left mx-3 mb-4" (click)="previous()">
+                    Previous
+                </button>
+                <button type="button" class="btn btn-primary pull-right mx-3 mb-4" (click)="next()">
+                    Save & next
+                </button>
+                <button type="button" class="btn btn-danger pull-right mb-4" (click)="cancelTrainingMaterial()">
+                    Cancel
+                </button>
+            </div>
+
+        </fieldset>
+
+
+        <fieldset *ngIf="step === 6" style="overflow-x: hidden;">
+            <form class="card mt-4 mx-5 mb-4" [formGroup]="monitoringQuestionsForm">
+                <div formArrayName="monitorQuestionFormArray" style="margin-left:18rem">
+                    <label class="mb-3 mt-3">Define points to be verified by monitor</label>
+                    <div *ngFor="let mQuest of monitorQuestionArr.controls; let i=index">
+                        <div [formGroupName]="i" style="display: flex;">
+                            <div class="col-md-8">
+                                <input type="text" class="form-control mb-2" formControlName="question" />
+                                <small class="form-text text-muted" *ngIf="!monitorQuestionArr.controls[i].get('questionText')?.valid &&
+                                (monitorQuestionArr.controls[i].get('question')?.touched || 
+                                monitorQuestionArr.controls[i].get('question')?.dirty)">
+                                    <span *ngIf="monitorQuestionArr.controls[i].get('question')?.errors?.['required']"
+                                        class="error">
+                                        This is a required field
+                                    </span>
+                                </small>
+                            </div>
+                            <div class="col-md-6">
+                                <button style="background-color:transparent;border:none;color:#DC3545;font-size: 1.8rem"
+                                    class="fa fa-minus-circle mx-3" aria-hidden="true"
+                                    (click)="removeMonitoringQuestionAtIndex(i,mQuest)"></button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary-blue mb-4 mx-0 mt-2 mx-5 pull-right"
+                            style="width: 125px !important;" (click)="addMoreMonitoringQuest()"
+                            [disabled]="monitoringQuestionsForm.invalid">
+                            <strong class="fa fa-plus"></strong>&nbsp; Add More
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="mt-4">
+                <button type="button" class="btn btn-primary-blue pull-left mx-3 mb-4" (click)="previous()">
+                    Previous
+                </button>
+                <button type="button" class="btn btn-primary pull-right mx-3 mb-4" (click)="submit()"
+                    [disabled]="monitoringQuestionsForm.invalid">
+                    Final Submit
+                </button>
+                <button type="button" class="btn btn-danger pull-right mb-4" (click)="cancelTrainingMaterial()">
+                    Cancel
+                </button>
+            </div>
+
+
+
+        </fieldset>
+
+
+    </div>
+</div>
