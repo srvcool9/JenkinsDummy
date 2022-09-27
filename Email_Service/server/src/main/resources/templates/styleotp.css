@@ -1,0 +1,70 @@
+
+
+.otp-image{
+    width: 20%;
+    height: 30%;
+    position: absolute;
+    left: 39%;
+    top: 20px;
+    border-radius: 5px;
+}
+.fedora-image{
+    width: 100%;
+    height: 70vh;
+    position: relative;
+}
+.heading-otp{
+    color: aliceblue;
+    position: absolute;
+    top: 40%;
+    font-size: 25px;
+    left: 32%;
+    font-family: Tangerine;
+   font-family: cursive;
+}
+/* .anniversary{
+    position: absolute;
+    top: 55%;
+    left: 5%;
+    width: 40%;
+    height: 40px;
+    color: goldenrod;
+    font-size: 30px;
+    font-family: Tangerine;
+    font-weight: bold;
+}
+.regards-otp{
+    position: absolute;
+    top: 72%;
+    left: 30%;
+    color: goldenrod;
+    font-size: 30px;
+    font-family: Tangerine;
+    font-weight: bold;
+    background-color: rgb(253, 242, 226);
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px 0px 20px 0px;
+} */
+.logo{
+    position: absolute;
+    top: 2%;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+    opacity: 0.7;
+
+}
+/* .text-otp{
+    position: absolute;
+    top: 55%;
+    left: 22%;
+    color: goldenrod;
+    font-size: 30px;
+    font-family: Tangerine;
+    font-weight: bold;
+    background-color: rgb(253, 242, 226);
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px 0px 20px 0px;
+} */

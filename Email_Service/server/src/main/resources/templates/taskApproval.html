@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+    <title>PORTFOLIO</title>
+    <link rel="stylesheet" type="text/css" href="styleotp.css">
+</head>
+<body>
+<div style="width: 60%;height: 100%;font-family: Tangerine;">
+    <h4 th:text="${'Greetings!'}" class="text"></h4>
+    <h4 th:text="${'Your request for Task ' + taskname + '  has been approved by  ' + name + ' on ' + date + ' and points have been added in your account.' }" class="text"></h4>
+    <br>
+    <h4 th:text="${'Thank you'}" class="text"></h4>
+</div>
+</body>
+</html>

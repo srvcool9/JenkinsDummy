@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>PORTFOLIO</title>
+    <link href="styleotp.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div style="width: 60%;height: 100%;font-family: Tangerine;">
+    <h4 class="text" th:text="${'Greetings!'}"></h4>
+
+    <h4 class="text"
+        th:text="${'New Reward request has been raised by ' + requesterName + ' on ' + date +'. Check out and take the action against it.' }"></h4>
+    <br>
+    <h4 class="text" th:text="${'Thank You'}"></h4>
+</div>
+</body>
+</html>

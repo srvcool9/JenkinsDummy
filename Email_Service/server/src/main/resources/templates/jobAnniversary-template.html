@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>happy_job_anniversary</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<h2 th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></h2>
+
+<table id="Table_01" width="600" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td bgcolor="#FFFFFF">
+            &nbsp;</td>
+        <td style="border-left-style: solid; border-left-color: #898989; border-left-width: 2px; border-right-style: solid; border-right-color: #898989; border-right-width: 1px" bgcolor="#F4F4F4">
+            <table border="0" width="100%" cellspacing="10" cellpadding="0">
+                <tr>
+                    <td colspan="3" align="center"><b><i>
+                        <font size="5" color="#800080" >Happy Job Anniversary <p th:text="${'Congratulations Dear ' + name}"></p>
+                            <p><font size="5" color="#899980"
+                                Wish You a Proseperous and Successful Career Ahead.....></font>
+                            </p>
+
+                            <span style='font-size:14.0pt;font-family:"Harlow Solid Italic";color:#C14D71'>From Netlink Family!!</span>
+                        </font></i></b></td>
+                </tr>
+
+            </table>
+        </td>
+        <td bgcolor="#FFFFFF">
+            &nbsp;</td>
+    </tr>
+</table>
+
+</body>
+</html>

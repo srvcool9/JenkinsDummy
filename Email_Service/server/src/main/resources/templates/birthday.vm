@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html>
+  <head>
+    <title>PORTFOLIO</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Tangerine">
+  </head>
+    <body>
+        <div style="width: 40%;height: 50%; font-family: Tangerine;">
+            <img src="F:\\images\\birthday.jpg" class="birthday-image">
+            <img src="F:\\images\\logo5.png" class="logo">
+            <p class="heading">Happy Birthday</p>
+            <p th:text="${'Happy Birthday Dear ' + name}" class="text"></p>
+            <p class="birthday">Wish You a Healthy and Successful Life Ahead.....</p>
+            <p class="regards">From Netlink Family....!!</p>
+        </div>
+    </body>
+</html>
