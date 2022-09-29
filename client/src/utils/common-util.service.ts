@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as CryptoJS from 'crypto-js';
+// import * as CryptoJS from 'crypto-js';
 import { User } from '../app/views/pages/model/user';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Router } from '@angular/router';
@@ -189,21 +189,21 @@ isControlRestrictionAuth(moduleName): boolean {
    * Encrypt the input string
    * @param input
    */
-  encrypt(input) {
-    var wordArray = CryptoJS.enc.Utf8.parse(input);
-    return CryptoJS.enc.Base64.stringify(wordArray);
-  }
-  /**
-   * Decrypt the encrypted string
-   * @param encryptedInput
-   */
-  decrypt(encryptedInput) {
-    if (encryptedInput != null && encryptedInput != undefined) {
-      encryptedInput = encryptedInput.replace('%3D', '=');
-      var parsedWordArray = CryptoJS.enc.Base64.parse(encryptedInput);
-      return parsedWordArray.toString(CryptoJS.enc.Utf8);
-    }
-  }
+  // encrypt(input) {
+  //   var wordArray = CryptoJS.enc.Utf8.parse(input);
+  //   return CryptoJS.enc.Base64.stringify(wordArray);
+  // }
+  // /**
+  //  * Decrypt the encrypted string
+  //  * @param encryptedInput
+  //  */
+  // decrypt(encryptedInput) {
+  //   if (encryptedInput != null && encryptedInput != undefined) {
+  //     encryptedInput = encryptedInput.replace('%3D', '=');
+  //     var parsedWordArray = CryptoJS.enc.Base64.parse(encryptedInput);
+  //     return parsedWordArray.toString(CryptoJS.enc.Utf8);
+  //   }
+  // }
 
  
   getColumnHeader(field: string, headerName: string) {
