@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.netlink</groupId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<artifactId>rsk</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Rajya Shiksha Kendra</name>
